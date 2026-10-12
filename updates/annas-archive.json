@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "type": "annas-archive",
-  "version": "1.1.0",
-  "sourceUrl": "https://raw.githubusercontent.com/TheCoolHippo/bookorbit-annas-archive/7ae55fd352592ea7a8397fa6c78f240bf058b455/indexers/annas-archive/index.mjs",
-  "sha256": "1f5c2222068edb7b69d7022463697c55310d2aad23322c0bce157c9c61022399",
-  "signature": "X9a02XZnxgB3x6wg0yZjQBK3bUxe938R+YZUgCo9xNjB19XvQLNubzl0Vl5KNL5RLqbfIEksP3lNcRPtp43RCA=="
+  "version": "1.1.1",
+  "sourceUrl": "https://raw.githubusercontent.com/TheCoolHippo/bookorbit-annas-archive/5a25054e6adc80d46b28444ec99500857b7661bd/indexers/annas-archive/index.mjs",
+  "sha256": "a25109fd75f472a5f1e348641333ee1e9fa609c98c28ee254239c0bfdfec17c9",
+  "signature": "WF6lV40fTeAiM5ucbzqkCmR320ZHbYtmy0vlujujcYU0AneBcSPAs9JwWcgeGPTICDbiS+1ZNCnSQajvyiY2CA=="
 }
