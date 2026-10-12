@@ -115,7 +115,7 @@ function looksLikeAnnasArchive(html) {
 
 export default {
   apiVersion: 1,
-  version: '1.1.0',
+  version: '1.1.1',
   update: {
     manifestUrl: 'https://raw.githubusercontent.com/TheCoolHippo/bookorbit-annas-archive/main/updates/annas-archive.json',
     ed25519PublicKey: 'OlmPIog8s2G128FNUXGEIWoAsok_yUqQvHFK9T_1L-M',
@@ -602,7 +602,12 @@ async function libgenDownloadUrl(md5, config, host, signal) {
     const page = new URL('/ads.php', mirror);
     page.searchParams.set('md5', md5);
     try {
-      const response = await host.fetch(page.href, { method: 'GET', headers: { 'User-Agent': USER_AGENT, Accept: HTML_ACCEPT } });
+      // libgen.li answers an empty 200 to an ad page request with no Referer, an anti-hotlinking
+      // check Shelfmark ran into first. A same-origin one is enough.
+      const response = await host.fetch(page.href, {
+        method: 'GET',
+        headers: { 'User-Agent': USER_AGENT, Accept: HTML_ACCEPT, Referer: `${mirror}/` },
+      });
       const html = await readBoundedText(response, MAX_PAGE_BYTES);
       const link = LIBGEN_GET_LINK.exec(html)?.[1];
       if (link) return new URL(link.replace(/&amp;/g, '&'), `${mirror}/`).href;

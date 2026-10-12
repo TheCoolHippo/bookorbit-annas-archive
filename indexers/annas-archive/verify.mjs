@@ -371,6 +371,8 @@ const serviceRedirects = () => new Response(null, { status: 302, headers: { loca
   const file = await plugin.resolveFile(release, config(), host, undefined);
   check('resolve: dead redirect falls back to a mirror get.php link', /^https:\/\/libgen\.bz\/get\.php\?md5=[a-f0-9]{32}&key=[A-Za-z0-9]+$/.test(file.url), file.url);
   check('resolve: never follows the service to libgen.vg', !host.requests.some((r) => r.url.includes('libgen.vg')));
+  const ads = host.requests.find((r) => r.url.includes('libgen.bz/ads.php'));
+  check('resolve: ad page asked with a same-origin Referer', ads?.init.headers?.Referer === 'https://libgen.bz/', JSON.stringify(ads?.init.headers));
 }
 {
   const plugin = await loadPlugin();
