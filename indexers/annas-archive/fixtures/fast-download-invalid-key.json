@@ -1,0 +1,16 @@
+{
+  "///download_url": [
+    "This API is intended as a stable JSON API for getting fast download files as a member.",
+    "A successful request will return status code 200 or 204, a `download_url` field and `account_fast_download_info`.",
+    "Bad responses use different status codes, a `download_url` set to `null`, and `error` field with string description.",
+    "Accepted query parameters:",
+    "- `md5` (required): the md5 string of the requested file.",
+    "- `key` (required): the secret key for your account (which must have membership).",
+    "- `path_index` (optional): Integer, 0 or larger, indicating the collection (if the file is present in more than one).",
+    "- `domain_index` (optional): Integer, 0 or larger, indicating the download server, e.g. 0='Fast Partner Server #1'.",
+    "These parameters correspond to the fast download page like this: /fast_download/{md5}/{path_index}/{domain_index}",
+    "Example: /dyn/api/fast_download.json?md5=d6e1dc51a50726f00ec438af21952a45&key=YOUR_SECRET_KEY"
+  ],
+  "download_url": null,
+  "error": "Invalid secret key"
+}
