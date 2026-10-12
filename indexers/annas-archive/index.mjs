@@ -115,7 +115,7 @@ function looksLikeAnnasArchive(html) {
 
 export default {
   apiVersion: 1,
-  version: '1.0.0',
+  version: '1.1.0',
   update: {
     manifestUrl: 'https://raw.githubusercontent.com/TheCoolHippo/bookorbit-annas-archive/main/updates/annas-archive.json',
     ed25519PublicKey: 'OlmPIog8s2G128FNUXGEIWoAsok_yUqQvHFK9T_1L-M',
@@ -166,6 +166,14 @@ export default {
       label: 'Library Genesis mirrors',
       hint: 'Tried in order. Mirrors carry the same catalogue but differ in speed and uptime.',
       default: DEFAULT_LIBGEN_MIRRORS,
+      format: 'list',
+    },
+    {
+      key: 'languages',
+      type: 'string',
+      label: 'Accepted languages',
+      hint: 'ISO codes such as en, fr. Results stated in another language are dropped; results that state no language are kept. Empty accepts every language.',
+      default: '',
       format: 'list',
     },
     {
@@ -294,7 +302,7 @@ async function searchAnnas(query, config, formats, host, signal, remaining) {
 
   for (const mirror of open) {
     if (signal?.aborted || remaining() < LIBGEN_RESERVE_MS) break;
-    const url = annasSearchUrl(mirror, query, formats);
+    const url = annasSearchUrl(mirror, query, formats, acceptedLanguages(config));
 
     let page;
     try {
@@ -309,7 +317,7 @@ async function searchAnnas(query, config, formats, host, signal, remaining) {
       challenged = { mirror, url, captcha: page.captcha };
       break;
     }
-    const parsed = parseAnnasPage(page.html, query, formats);
+    const parsed = parseAnnasPage(page.html, query, formats, acceptedLanguages(config));
     if (parsed === LAYOUT_DRIFT) return { answered: false, reason: DRIFT_REASON };
     if (parsed) return { answered: true, releases: parsed.slice(0, query.limit) };
     reason = `${hostOf(mirror)} did not answer with an Anna's Archive page (parked or seized domain?)`;
@@ -323,7 +331,7 @@ async function searchAnnas(query, config, formats, host, signal, remaining) {
       const html = await solveWithFlareSolverr(host, solver, challenged.url, remaining() - LIBGEN_RESERVE_MS);
       const marker = challengeMarker(html);
       if (!marker) {
-        const parsed = parseAnnasPage(html, query, formats);
+        const parsed = parseAnnasPage(html, query, formats, acceptedLanguages(config));
         if (parsed === LAYOUT_DRIFT) return { answered: false, reason: DRIFT_REASON };
         if (parsed) return { answered: true, releases: parsed.slice(0, query.limit) };
         return { answered: false, reason: "FlareSolverr returned a page that is not an Anna's Archive search page" };
@@ -356,7 +364,7 @@ function block(mirrors, reason) {
  * The table view, because it lays every result out in fixed columns. The same parameters
  * Shelfmark sends: only records with a downloadable file, in the wanted formats.
  */
-function annasSearchUrl(mirror, query, formats) {
+function annasSearchUrl(mirror, query, formats, accepted = []) {
   const url = new URL('/search', mirror);
   url.searchParams.set('index', '');
   url.searchParams.set('page', '1');
@@ -381,6 +389,7 @@ function annasSearchUrl(mirror, query, formats) {
   }
   const language = query.language ? normalizeLanguage(query.language) : null;
   if (language) url.searchParams.set('lang', language);
+  else for (const code of accepted) url.searchParams.append('lang', code);
   return url.href;
 }
 
@@ -442,7 +451,7 @@ const LAYOUT_DRIFT = Symbol('layout drift');
  * A page with no results table can be a genuine empty answer, a parked domain squatting on an old
  * mirror name, or the layout having changed. Only the first is a reason to report nothing found.
  */
-function parseAnnasPage(page, query, formats) {
+function parseAnnasPage(page, query, formats, accepted = []) {
   // Comments first: a commented-out `<table>` would otherwise be read as the results.
   const html = page.replace(/<!--[\s\S]*?-->/g, '');
   const table = findFirstTable(html);
@@ -456,7 +465,7 @@ function parseAnnasPage(page, query, formats) {
   for (const row of rowsOf(table)) {
     const release = annasRelease(row, formats);
     if (!release || seen.has(release.guid)) continue;
-    if (!languagesAgree(query.language, release.language)) continue;
+    if (!languagesAgree(query.language, release.language) || !languageAccepted(accepted, release.language)) continue;
     seen.add(release.guid);
     releases.push(release);
   }
@@ -628,6 +637,7 @@ async function searchLibgen(query, config, formats, host, signal, remaining) {
 
   const releases = [];
   const seen = new Set();
+  const accepted = acceptedLanguages(config);
   let failure = null;
 
   for (const pass of passes) {
@@ -636,6 +646,7 @@ async function searchLibgen(query, config, formats, host, signal, remaining) {
       const html = await readLibgenPage(host, config, pass);
       for (const release of libgenReleases(html, formats)) {
         if (seen.has(release.guid) || !languagesAgree(query.language, release.language)) continue;
+        if (!languageAccepted(accepted, release.language)) continue;
         seen.add(release.guid);
         releases.push(release);
         if (releases.length >= query.limit) break;
@@ -878,6 +889,20 @@ function languageCode(value) {
   const named = LANGUAGE_BY_NAME[trimmed.split(/[,;(/[]/)[0].trim()];
   if (named) return named;
   return /^[a-z]{2,3}$/.test(trimmed) ? normalizeLanguage(trimmed) : null;
+}
+
+/** The configured languages as ISO 639-1 codes; empty means every language. */
+function acceptedLanguages(config) {
+  const raw = config.settings?.languages;
+  if (typeof raw !== 'string' || !raw.trim()) return [];
+  return splitList(raw)
+    .map((value) => normalizeLanguage(value))
+    .filter((code, index, all) => /^[a-z]{2}$/.test(code) && all.indexOf(code) === index);
+}
+
+/** Unstated is kept: much of both catalogues carries no language, and the scorer keeps it too. */
+function languageAccepted(accepted, released) {
+  return accepted.length === 0 || !released || accepted.includes(normalizeLanguage(released));
 }
 
 /** A row that states no language is accepted, exactly as BookOrbit's scorer accepts it. */

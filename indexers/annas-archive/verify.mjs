@@ -155,6 +155,40 @@ async function rejects(promise) {
   check('formats: configured formats sent', new URL(host.requests[0].url).searchParams.getAll('ext').join() === 'epub,pdf');
 }
 
+/* --- accepted languages ------------------------------------------------------------------------ */
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([
+    [ANNAS, (url) => redirect(`${new URL(url).pathname}?check=1`)],
+    [LIBGEN, () => html(fixture('libgen-dune.html'))],
+  ]);
+  const settings = { languages: 'en, fr', ebookFormats: 'epub,mobi,azw3,fb2,pdf,djvu' };
+  const all = await plugin.search(query({ limit: 50 }), config({ settings: { ebookFormats: settings.ebookFormats } }), makeHost([
+    [ANNAS, (url) => redirect(`${new URL(url).pathname}?check=1`)],
+    [LIBGEN, () => html(fixture('libgen-dune.html'))],
+  ]), undefined);
+  const kept = await plugin.search(query({ limit: 50 }), config({ settings }), host, undefined);
+  check('languages: fixture holds others to drop', all.some((r) => r.language && !['en', 'fr'].includes(r.language)), JSON.stringify(all.map((r) => r.language)));
+  check('languages: only en, fr or unstated kept', kept.length > 0 && kept.every((r) => !r.language || ['en', 'fr'].includes(r.language)), JSON.stringify(kept.map((r) => r.language)));
+  check('languages: nothing in en/fr lost', kept.length === all.filter((r) => !r.language || ['en', 'fr'].includes(r.language)).length);
+
+  const annas = await loadPlugin();
+  const annasHost = makeHost([[ANNAS, () => html(fixture('annas-search-table.html'))]]);
+  const rows = await annas.search(query(), config({ settings: { languages: 'fre' } }), annasHost, undefined);
+  check('languages: 639-2 code accepted', rows.every((r) => !r.language || r.language === 'fr') && rows.some((r) => r.language === 'fr'));
+  check('languages: unstated row kept', rows.some((r) => r.guid === '5555555555555555555555555555555e'));
+  const sent = new URL(annasHost.requests[0].url).searchParams.getAll('lang');
+  check('languages: sent to Anna\'s Archive', sent.join() === 'fr', sent.join());
+
+  const both = makeHost([[ANNAS, () => html(fixture('annas-search-table.html'))]]);
+  await (await loadPlugin()).search(query(), config({ settings: { languages: 'en,fr' } }), both, undefined);
+  check('languages: several sent as repeated lang', new URL(both.requests[0].url).searchParams.getAll('lang').join() === 'en,fr');
+
+  const requested = makeHost([[ANNAS, () => html(fixture('annas-search-table.html'))]]);
+  await (await loadPlugin()).search(query({ language: 'en' }), config({ settings: { languages: 'en,fr' } }), requested, undefined);
+  check('languages: a request\'s own language wins in the URL', new URL(requested.requests[0].url).searchParams.getAll('lang').join() === 'en');
+}
+
 /* --- the empty answer is an answer ----------------------------------------------------------- */
 {
   const plugin = await loadPlugin();

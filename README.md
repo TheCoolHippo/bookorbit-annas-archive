@@ -62,6 +62,7 @@ click **Test**. The test reports which catalogue answered and whether your key w
 | Search Library Genesis when blocked | on | Turn off to see the protection error instead. |
 | Library Genesis mirrors | `libgen.li`, `libgen.bz` | Tried in order. |
 | Ebook formats | epub, mobi, azw3, fb2 | `azw`, `djvu` and `pdf` can be added. |
+| Accepted languages | empty (all) | ISO codes such as `en, fr`. Results stated in another language are dropped; results with no stated language are kept, as BookOrbit's own scoring keeps them. Also sent to Anna's Archive as its language filter. |
 
 BookOrbit gives each indexer 20 seconds. A FlareSolverr solve takes 5 to 30 seconds, so the
 plugin only starts one when it can still leave about 7 seconds for the Library Genesis fallback.
