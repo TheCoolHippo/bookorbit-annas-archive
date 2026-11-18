@@ -1,0 +1,1045 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="max-age=604800, must-revalidate">
+	<meta name="rating" content="general">
+	<!--<link href="/rss/index.php" rel="alternate" type="application/rss+xml" title="News" />-->
+	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+	<title>Library Genesis</title>
+		
+	<!--[if IE 6]>
+	<style>
+		body {behavior: url("/csshover3.htc");}
+		#menu li .drop {background:url("img/drop.gif") no-repeat right 8px; 
+	</style>
+	<![endif]-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">	
+	
+<link href="/css/font.min.css" rel="stylesheet">	
+<style>
+nav.navbar .dropdown:hover > .dropdown-menu {
+ display: block; 
+}
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+			font-size: 3.5rem;
+		}
+	}
+
+.panel-heading .accordion-toggle:after {
+    font-family: "Glyphicons Halflings";  
+    content: "\e114";    
+    float: right;       
+    color: grey;         
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    content: "\e080";   
+}
+.tooltip-inner {
+    max-width: 350px;
+    width: 350px; 
+}
+h1 {
+	display: block; 
+	font-size: 1.8rem; 
+	font-weight: bold; 
+	font-family: Georgia, "Times New Roman", Times, serif;  color: #A00000; 
+}
+#tablelibgen td { 
+	font-family: "Pt Sans", Tahoma, Helvetica, sans-serif; 
+	margin: 0; 
+	padding: 0em 3px; 
+	font-size: 1rem;
+}
+
+#tablelibgen1 td { 
+	font-family: "Pt Sans", Tahoma, Helvetica, sans-serif; 
+	margin: 0; 
+	padding: 0em 3px; 
+	font-size: 1rem;
+}
+
+.taghide {
+    display: none; 
+}
+.taghide + label ~ div {
+    display: none;
+}
+/* оформляем текст label */
+.taghide + label {
+    display: inline-block; 
+}
+/* вид текста label при активном переключателе */
+
+/* когда чекбокс активен показываем блоки с содержанием  */
+.taghide:checked + label + div {
+    display: block; 
+}
+
+
+
+/*.navbar {
+	background-color: #BBBBBB;
+}*/
+	</style>
+
+	<link rel="stylesheet" href="/css/dark-mode.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../css/paginator3000.css" />
+<script type="text/javascript" src="../js/paginator3000.js"></script><script data-cfasync="false" async type="text/javascript" src="//je.deuxseethe.com/rUJqARoMIAl18z/146156"></script>
+
+
+
+
+</head>
+<body>    
+<nav class="navbar navbar-expand-md navbar-dark bg-secondary  mb-1">
+  
+   <a class="navbar-brand" href="/index.php">
+    <img src="/img/logo.png"  height="30" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/community/app.php/article/news">NEWS <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/community/">FORUM <span class="sr-only">(current)</span></a>
+      </li>
+	
+      <li class="nav-item dropdown">
+<a class="btn btn-secondary dropdown-toggle" href="/community/ucp.php?mode=login" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          LOGIN
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">    
+          <a class="dropdown-item" href="/community/ucp.php?mode=register">Register</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          DOWNLOAD
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">      
+
+          <a class="dropdown-item" href="/mirrors.php">Mirrors</a>
+          <a class="dropdown-item" href="http://libgenfrialc7tguyjywa36vtrdcplwpxaw43h6o63dmmwhvavo5rqqd.onion/">TOR</a>
+
+	<div class="dropdown-divider"></div>
+         <h6 class="dropdown-header">P2P</h6>
+          <a class="dropdown-item" href="/torrents/">Torrents</a>
+          <a class="dropdown-item" href="https://ipdl.cat/data/torrents.html">Torrents status</a>
+          <a class="dropdown-item" href="/nzb/">Usenet (*.nzb)</a>
+          <a class="dropdown-item" href="/soft/">Soft</a>
+	<!--https://phillm.net/libgen-stats-table.php-->
+
+
+
+
+	<div class="dropdown-divider"></div>
+         <h6 class="dropdown-header">DB Dumps</h6>
+          <a class="dropdown-item" href="/dirlist.php?dir=dbdumps">Libgen</a>
+          <a class="dropdown-item" href="http://libgen.rs/dbdumps/">libgen.rs (gen.lib.rus.ec)</a>
+
+	<!--<div class="dropdown-divider"></div>
+ 	 <a class="dropdown-item" href="/magz0/">Unsorted magz</a>
+ 	 <a class="dropdown-item" href="/fict0/">Unsorted fiction</a>
+
+	 <a class="dropdown-item" href="/comics4/">Unsorted comics</a>
+        </div>-->
+
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="librarian.php" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          UPLOAD
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">  
+          <a class="dropdown-item" href="ftp://ftp.libgen.bz/upload/">FTP</a> 
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="/index.php?req=fmode:last&topics1=all" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          LAST
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+	<a class="dropdown-item" href="/index.php?req=fmode:last&topics1=all"><b>Files</b></a>
+
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=l">Libgen</a>
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=a">Scientific Articles</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=f">Fiction</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=c">Comics</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=m">Magazines</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=s">Standards</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=r">Fiction RUS</a>
+	<div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=e">Editions</a> 
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=s">Series</a>
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=p">Publishers</a> 
+        <!--  <a class="dropdown-item" href="/index.php?req=mode:last&curtab=f">Files</a> -->
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=a">Authors</a> 
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=w">Works</a>
+
+
+  
+        </div>
+
+
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          OTHERS
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">  
+          <a class="dropdown-item" href="json.php">API</a> 
+          <a class="dropdown-item" href="rss.php">RSS</a> 
+          <a class="dropdown-item" href="top.php">Top 100 users</a> 
+          <a class="dropdown-item" href="stat.php">Stats</a>
+
+	<a class="dropdown-item" href="topics.php">Topics</a>
+
+          <a class="dropdown-item" href="batchsearchindex.php">Batch search</a>  
+          <a class="dropdown-item" href="biblioservice.php">Bibliographic services</a>
+          <a class="dropdown-item" href="https://wiki.mhut.org/software:libgen_desktop">Libgen librarian for desktop</a>
+
+
+          <a class="dropdown-item" href="/code/">Source (PHP)</a>
+          <a class="dropdown-item" href="/soft/">LG soft</a>
+          <!--<a class="dropdown-item" href="/import/">Import local files in LG format</a>-->
+          <a class="dropdown-item" href="https://z-library.se/fulltext/">Full text search</a>
+
+
+
+        </div>
+      </li>
+
+
+
+     <!-- <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="topics.php" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          Topics
+        </a>
+      </li>
+-->
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          LINKS
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">  
+
+
+          
+          <a class="dropdown-item" href="http://sci-hub.ru">Sci-hub</a> 
+          <a class="dropdown-item" href="http://magzdb.org">Magzdb.org</a>
+
+          <a class="dropdown-item" href="http://nlr.ru/rlin/Periodika_rus.php">РНБ</a>
+          <a class="dropdown-item" href="http://rsl.ru/">РГБ</a>
+          <a class="dropdown-item" href="http://loc.gov/">LOC</a>
+          <a class="dropdown-item" href="https://comicvine.gamespot.com/">ComicVine</a>
+          <a class="dropdown-item" href="http://cyberleninka.ru/">Cyberleninka</a>
+          <a class="dropdown-item" href="http://lib.rus.ec/">Lib.rus.ec</a>
+          <a class="dropdown-item" href="http://flibusta.is/">Flibusta.is</a>
+          <a class="dropdown-item" href="http://goodreads.com/">Goodreads.com</a>
+          <a class="dropdown-item" href="http://worldcat.org/">Worldcat.org</a>
+          <a class="dropdown-item" href="https://wiki.archiveteam.org/">Archive team</a>
+          <a class="dropdown-item" href="https://www.reddit.com/r/libgen/">Reddit</a>
+          <a class="dropdown-item" href="http://annas-archive.org/">Anna's Archive</a>
+          <a class="dropdown-item" href="https://welib.org/">Welib</a>
+          <a class="dropdown-item" href="https://open-slum.org/">The Shadow Library Uptime Monitor</a>
+
+        </div>
+
+      </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary" href="index.php?req=mode:req&curtab=e" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          WANTED
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="nav-link">
+
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="darkSwitch">
+      <label class="custom-control-label" for="darkSwitch">🌓</label>
+    </div>
+    <script src="/js/dark-mode-switch.js"></script>
+  </div>
+   <a class="navbar-brand" href="setlang.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&lang=ru">RU</a>
+</nav>
+<form class="card p-2 needs-validation" novalidate id="formlibgen" action="index.php" enctype="multipart/form-data" METHOD="GET">
+<div class="input-group mb-3" >
+	<input autofocus type="text" class="form-control" placeholder="Input value" name="req" aria-label="input text" aria-describedby="button-addon2" value="asterix" required>
+	<div class="input-group-append">
+	<button class="btn btn-outline-secondary"  id="button-addon2" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&#128269;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+	</div>
+
+	<div class="invalid-feedback">Input value</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-8">	
+			<div class="d-block" id="topic">
+				<strong>Search in fields:</strong>
+				<input type="checkbox" checked class="column-input" id="colt" name="columns[]" value="t">
+				<label class="column-label" for="coltitle">Title</label>
+				<input type="checkbox" checked class="column-input" id="cola" name="columns[]" value="a">
+				<label class="column-label" for="colauthor">Author(s)</label>
+				<input type="checkbox"  class="column-input" id="cols" name="columns[]" value="s">
+				<label class="column-label" for="colseries">Series</label>
+				<input type="checkbox"  class="column-input" id="coly" name="columns[]" value="y">
+				<label class="column-label" for="colyear">Year</label>
+				<input type="checkbox"  class="column-input" id="colp" name="columns[]" value="p">
+				<label class="column-label" for="colpublisher">Publisher</label>
+				<input type="checkbox"  class="column-input" id="coli" name="columns[]" value="i">
+				<label class="column-label" for="colisbn">ISBN</label>
+	  		</div>
+	
+	  		<div class="d-block" id="object">
+				<strong>Search in objects:</strong>
+				<input type="checkbox" checked class="column-input" id="objf" name="objects[]" value="f">
+				<label class="column-label" for="objf">Files</label>
+				<input type="checkbox"  class="column-input" id="obje" name="objects[]" value="e">
+				<label class="column-label" for="obje">Editions</label>
+				<input type="checkbox"  class="column-input" id="objs" name="objects[]" value="s">
+				<label class="column-label" for="objs">Series</label>
+				<input type="checkbox"  class="column-input" id="obja" name="objects[]" value="a">
+				<label class="column-label" for="obja">Authors</label>
+				<input type="checkbox"  class="column-input" id="objp" name="objects[]" value="p">
+				<label class="column-label" for="objp">Publishers</label>
+				<input type="checkbox"  class="column-input" id="objw" name="objects[]" value="w">
+				<label class="column-label" for="objw">Works</label>
+			</div>
+			<div class="d-block" id="column">
+				<strong>Search in topics :</strong>
+				<input type="checkbox"  class="column-input" id="topl" name="topics[]" value="l" >
+				<label class="column-label" for="topl">Libgen</label>
+				<input type="checkbox" checked class="column-input" id="topc" name="topics[]" value="c" >
+				<label class="column-label" for="topc">Comics</label>
+				<input type="checkbox"  class="column-input" id="topf" name="topics[]" value="f" >
+				<label class="column-label" for="topf">Fiction</label>
+				<input type="checkbox"  class="column-input" id="topa" name="topics[]" value="a" >
+				<label class="column-label" for="topa">Scientific Articles</label>
+				<input type="checkbox"  class="column-input" id="topm" name="topics[]" value="m" >
+				<label class="column-label" for="topm">Magazines</label>
+				<input type="checkbox"  class="column-input" id="topr" name="topics[]" value="r" >
+				<label class="column-label" for="topr">Fiction RUS</label>
+				<input type="checkbox"  class="column-input" id="tops" name="topics[]" value="s" >
+				<label class="column-label" for="tops">Standards</label>
+			</div>
+ 		</div>
+		<div class="col-4">
+
+			<!--<div >
+				<strong>Results per page:</strong>
+
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="res25" name="res" class="custom-control-input" value="25" checked>
+				<label class="custom-control-label" for="res25">25</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="res50" name="res" class="custom-control-input" value="50" >
+				<label class="custom-control-label" for="res50">50</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="res100" name="res" class="custom-control-input" value="100" >
+				<label class="custom-control-label" for="res100">100</label>
+
+				</div>
+ 			</div>
+			-->
+			<div class="d-block">
+				<table><tr><td>
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="covers" name="covers" >
+						<label class="custom-control-label" for="covers"><strong>Show Covers</strong></label>
+						<script type="text/javascript">
+						$("input[id=covers]").change(function(){
+							if($(this).is(":checked")==false)
+							{
+								document.cookie = "covers=; expires=Thu 01-Jan-70 00:00:01 GMT;";
+							}
+						});				
+						</script>
+					</div>
+					</td><td> 
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="showch" name="showch" >
+						<label class="custom-control-label" for="showch"><strong>Show chapters</strong></label>
+						<script type="text/javascript">
+						$("input[id=showch]").change(function(){
+							if($(this).is(":checked")==false)
+							{
+								document.cookie = "showch=; expires=Thu 01-Jan-70 00:00:01 GMT;";
+							}
+						});				
+						</script>
+					</div>
+				</td></tr></table>
+
+ 			</div>
+
+			<div class="d-block">
+
+				<div class="custom-control custom-switch">
+					<input type="checkbox" class="custom-control-input" id="gmode" name="gmode" >
+					<label class="custom-control-label" for="gmode" ><strong>Google mode <a href="#" data-toggle="modal" data-target="#googlemodemodal">?</a></strong></label>
+					<script type="text/javascript">
+					$("input[id=gmode]").change(function(){
+						if($(this).is(":checked")==false)
+						{
+							document.cookie = "gmode=; expires=Thu 01-Jan-70 00:00:01 GMT;";
+						}
+					});
+					</script>
+					
+				</div>
+ 			</div>
+
+			<div >
+
+
+				<strong>Seach in files:</strong>
+
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="all" name="filesuns" class="custom-control-input" value="all" checked>
+				<label class="custom-control-label" for="all">All</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="sort" name="filesuns" class="custom-control-input" value="sort" >
+				<label class="custom-control-label" for="sort">Only sorted</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="unsort" name="filesuns" class="custom-control-input" value="unsort" >
+				<label class="custom-control-label" for="unsort">Only uns.</label>
+				</div>
+
+
+
+ 			</div>
+
+ 		</div>
+	</div>
+</div>
+</form><ul class="nav nav-tabs "><li class="nav-item">
+ <a class="nav-link active " href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f">Files <span class="badge badge-primary">3228</span> <i>Showing the first  2000</i></a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=e">Editions</a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=s">Series</a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=a">Authors</a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=p">Publishers</a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=w">Works</a>
+</li><li class="navbar-right" style="float: right !important;"><a class="nav-link" href="/json.php?object=f&ids=91251,91250,91252,110171,110225,123253,123254,127287,127288,127289,127291,127292,127293,127294,127295,127296,127299,786744,20918,43718,43719,43720,43721,43722,43723,43724,43725,43726,43727,43728,43729,43730,43731,43732,43734,43735,43736,43737,43738,43740,43741,43742,43743,43744,43745,43746,43747,43748,43750,43751,43754,81173,81174,81177,81181,84133,84136,84137,84143,84147,84149,84155,84157,84159,84163,84171,84179,84182,84183,84184,84186,84188,91211,91212,91213,91214,91215,91216,91217,91218,91219,91220,91221,91222,91223,91224,91225,91226,91227,91228,91229,91230,91231,91232,91233,91234,91235,91236,91237,91240,91241,91242,94862,105392,105397,105403,105404,105410,105413,105414,105416,105417,105419,105421,105422,105423,105424,105425,105426,105427,105428,105429,105435,105438,105440,105441,105442,105445,105446,105459,105475,105493,105495,105496,105501,105812,105819,105823,105824,106827,106828,108125,108255,108364,108365,108366,108367,108368,108369,108370,108371,108372,108373,108375,108376,108377,108378,108380,108381,108382,108383,108386,108387,108388,108389,108390,108391,108392,108393,108396,108397,108398,108400,108401,108402,110194,110209,110219,110223,110226,110233,110240,111997,111998,123243,123247,123249,123250,123252,127280,127281,127282,127283,127284,180079,180085,323213,323215,332544,332546,332551,332552,332553,332554,332556,332557,332558,332562,332565,332569,332578,332580,332582,332585,332586,333466,333726,333729,333731,333732,333734,333735,333736,333737,333740,333741,333752,333753,333754,333755,333757,333759,333766,334156,377034,377035,377037,377039,377040,391543,391544,391551,391552,399712,435641,435642,524060,577197,577198,577199,588450,594050,594051,594056,597407,613821,615549,617891,617892,617903,692226,788193,788196,788198,906258,906543,906544,906640,906816,906817,906818,906927,906928,906929,907033,907034,907035,907220,907221,907400,907401,911195,912204,912205,912554,912572,912573,912574,912624,912625,912626,912745,912761,912762,912795,913168,913169,913170,914844,929443,929460,929464,929468,957977,957988,963568,963575,963576,963578,963582,963592,963624,1063509,1099320,1142914,1142923,1142924,1765637,2049061,2049639,2049760,2052078,2053413,2053672,2053992,2055101,2056522,2056950,2057640,2058859,2060564,2060994,2061248,2063190,2063396,2063510,2063976,2063981,2066156,2067367,2068665,2068943,2069007,2069253,2070083,2070944,2071166,2071699,2072391,2074258,2074594,2074811,2074813,2075085,2076273,2076708,2076879,2076920,2077072,2077691,2078695,2079358,2081195,2081226,2082063,2082114,2083587,2083599,2083672,2083838,2085503,2085678,2085795,2087499,2087584,2087934,2088005,2088837,2088992,2089400,2090704,2092305,2092436,2094128,2094346,2094567,2094893,2095209,2096124,2096882,2097353,2097672,2098520,2098531,2098895,2100843,2100928,2101255,2102621,2104267,2105015,2105703,2105742,2106696,2107819,2107897,2108005,2108481,2109875,2110753,2110941,2111610,2111737,2112206,2112435,2112821,2113180,2113731,2114935,2115058,2115736,2116875,2117089,2118061,2118062,2118553,2118658,2118905,2121086,2121186,2121706,2122661,2122932,2124673,2125708,2126279,2127459,2128008,2128016,2128083,2128130,2128194,2130030,2130192,2131421,2131488,2131525,2132135,2132928,2132996,2133323,2133855,2135429,2136155,2136351,2136589,2137573,2137850,2139407,2141120,9268,9275,23305,23306,43749,63439,63440,63441,63442,63443,63444,63445,63446,63447,63449,63450,63451,63452,63454,63455,63458,75166,75167,84139,84141,84151,105393,105401,105412,105444,105447,105449,105455,105457,105458,105460,105474,105476,105481,105482,105486,105488,105489,105492,105494,105498,105500,105817,108374,108384,108394,108399,111999,123211,172350,172352,172353,172355,172370,172371,172374,172375,207526,323211,331641,331642,331648,331649,331651,331652,331662,331664,331666,332549,332555,332567,332568,333730,333742,391567,391573,391574,391575,391577,391586,597409,597410,664944,664945,664946,664947,664948,664949,664950,664951,664952,664953,664954,664955,664956,664957,664958,664959,664960,664961,664962,664963,664964,664965,664966,664967,664968,664969,664970,789997,862848,862849,862850,912502,926911,926912,926913,993113,993116,1981203,1981204,2048845,2049412,2051347,2052319,2053016,2055912,2056927,2057493,2060164,2061180,2061522,2063217,2064461,2064928,2065299,2066467,2068057,2068848,2069815,2071762,2072109,2072342,2073912,2075249,2075935,2076435,2077209,2077704,2078165,2078934,2079262,2081521,2082875,2083342,2084499,2084988,2088228,2089069,2089288,2089651,2090214,2090314,2090449,2091774,2093769,2094167,2095260,2095330,2095450,2096660,2098576,2099849,2100472,2100537,2101358,2101564,2102053,2102393,2103080,2103388,2103999,2104083,2106026,2106423,2106481,2107194,2107567,2107777,2109748,2109811,2111413,2111789,2112941,2113114,2114142,2114471,2114577,2114767,2114797,2117917,2118328,2118832,2119101,2120151,2120383,2121741,2121908,2122218,2124492,2126403,2126795,2127221,2127507,2128262,2131102,2132259,2134353,2134592,2135059,2136148,2137041,2137174,2137697,107674472,107674475,105543,172393,330523,332374,332376,332397,928069,1143749,1165370,2063173,2098968,107558494,701788,961101,1173187,1173188,107355409,107394115,107394118,107394119,63459,63461,63462,64727,64728,91243,91244,91247,91248,91249,91256,97286,105394,172385,172390,172394,172396,172398,172400,172404,172410,172412,172413,323207,391545,451597,562687,574652,576576,576578,594043,594044,594045,594048,594054,594057,594058,614219,617881,617884,617885,617887,617893,617894,617896,617897,617898,617899,617901,617902,662794,663156,690895,788195,906256,906259,911185,963593,1142918,1142922,1173189,1173192,1210026,1210027,103388917,103388918,103388919,103388923,103388924,103388925,103388926,103388927,103388928,103388929,103388930,103388931,103388935,103388939,103388942,103388943,103388944,103388946,103589115,103589159,103589160,103589161,103589162,103589163,103589164,103589165,107272458,107272459,107301016,107348650,107355407,107355408,107355410,107394110,107394111,107394112,107394113,107394114,107394117,107398224,107847919,112196309,112196310,112196312,112196313,112196314,112196316,112196317,112196318,112196319,112196321,112196322,112196323,112196325,112200054,115701641,115774611,115935689,116182669,116344386,116344387,116344388,116344389,116344390,23312,23313,81179,84193,105396,105418,105452,105453,108124,108379,108385,110172,110174,110176,110178,110180,110182,110184,110186,110188,110190,110192,110195,110197,110199,110201,110203,110205,110207,110211,110213,110215,110217,110221,110227,110229,110231,110235,110237,110239,127290,127297,127298,172347,172348,172349,172351,172354,172358,172359,172360,172361,172362,172363,172365,172366,172367,172368,172369,172372,172373,172387,172388,172389,172392,172395,172397,172399,172402,172403,172406,172407,172408,172409,172411,188872,332545,332550,332560,332572,333743,333751,334154,334155,391546,391547,391548,398611,399705,399716,428257,428258,428259,428260,428262,435638,435639,435640,438050,438051,438052,438053,438054,438055,438057,438058,438059,438061,438065,438071,438072,451598,472757,472758,472759,472760,472763,472765,472767,472775,472782,472783,481774,481776,481777,481781,481782,481783,488172,488173,498811,498840,498909,499008,499330,499731,500039,502619,504032,504033,504035,522734,522735,524061,541355,541360,562686,576577,587509,590952,594046,594055,617880,617882,617888,617890,617895,617900,692227,788197,789934,869264,869265,869266,869268,869271,869272,869275,869276,873439,873440,873443,873444,873445,883135,883136,906257,906260,906261,913745,926914,929457,929469,946046,946047,955106,963563,963566,963567,963569,963571,963573,963577,963579,963581,963583,963584,963585,963586,963588,963589,963590,963591,963623,976116,1069474,1135103,1135104,1135105,1135109,1135110,1135112,1141528,1142915,1142916,1142917,1142919,1142920,1142921,1142939,1173190,1173191,1173193,2061930,2062651,2072014,2087972,2106188,2115139,2134925,91056116,91091110,91091111,91091113,91091114,91091115,91091117,91091118,91091120,91091122,91091123,91091124,91091125,91091126,91091128,91091129,91095981,91095982,91095983,91111705,99168335,99175782,99258766,102910050,103388920,103388921,103388922,103388932,103388933,103388934,103388936,103388937,103388938,103388940,103388941,103388945,103570976,103570977,103570979,105451475,105483877,106087698,107200691,107230313,107230315,107239794,107257734,107258372,107268357,107271234,107271235,107271547,107271553,107271555,107271556,107271557,107271571,107271575,107271578,107271581,107271583,107271587,107271596,107271603,107271604,107271607,107308865,107348651,107348652,107354489,107354492,107354493,107354495,107354496,107354497,107354498,107354500,107354501,107354502,107354504,107354505,107354506,107354508,107354512,107354516,107354518,107354519,107354520,107354521,107354522,107354523,107398223,107398225,108354589,108354591,108354596,108354597,108354598,112146785,112146806,112146807,112146814,115690675,115691168,115695379,115770392,115770393,115770394,115770400,115770401,115770405,115796948,115796950,115796951,115815620,115854776,116001596,116179641,116179642,116478790,116534015,116534016,116534017,116539879,116539903,116635585,116635586,116635587,116635589,116635590,116635593,116635594,116635595,116635605,116636445,116636488,116636527,116636574,116636575,116636576,116636577,116636578,116636579,227,228,23304,23307,23308,23309,23310,23311,24223,43733,43739,43753,43755,43756,43757,45108,61085,63460,63463,63465,63466,63467,63469,63470,63471,63472,63473,63476,63477,63480,63482,64729,64730,64731,64733,64735,64737,64739,64742,64743,64744,64745,64746,64747,64748,64749,64751,64752,64755,66985,74871,81178,84135,84145,84153,84161,84165,84167,84169,84173,84175,84176,84181,84190,84192,91246,91253,91257,103440,103441,103715,104875,105395,105398,105399,105405,105406,105408,105409,105411,105415,105420,105430,105431,105432,105433,105434,105436,105437,105439,105450,105471,105472,105477,105478,105485,105491,105497,105499,105502,105503,105504,105506,105509,105511,105512,105513,105514,105515,105516,105517,105520,105524,105526,105527,105529,105533,105535,105537,105545,105811,105814,105815,105816,105820,105821,105822,108256,108257,108359,108403,108404,110173,110175,110177,110179,110181,110183,110185,110187,110189,110191,110193,110196,110198,110200,110202,110204,110206,110208,110210,110212,110214,110216,110218,110220,110222,110224,110228,110230,110232,110234,110236,110238,110796,110797,110798,110799,110800,110801,110802,110803,110804,110805,110806,110807,110808,110809,110810,123241,123242,123244,123245,123246,123248,123251,127285,127300,156725,156728,156730,172357,172382,172386,180080,182589,213906,289922,295833,309492,309493,323203,323208,323209,323212,323214,323216,331333,331334,331522,331668,331904,332543,332547,332548,332559,332561,332563,332564,332566,332570,332571,332573,332574,332575,332576,332577,332579,332581,332583,332584,332588,332664,333441,333442,333443,333444,333445,333446,333447,333448,333449,333450,333451,333452,333453,333454,333455,333456,333457,333458,333459,333460,333461,333462,333463,333464,333465,333467,333468,333469,333470,333471,333472,333473,333474,333475,333476,333477,333478,333479,333480,333727,333728,333733,333739,333744,333745,333746,333747,333750,333756,333758,333760,333762,333763,333764,333963,333964,353744,364577,364671,375356,375914,377036,377038,383593,391549,391550,391553,391559,391560,391563,391564,391565,391566,391568,391570,391579,391580,391588,391591,399678,399679,399680,399681,399682,399683,399684,399685,399686,399687,399688,399689,399690,399691,399692,399693,399694,399695,399696,399697,399698,399699,399700,399701,399702,399703,399704,399706,399707,399708,399709,399710,399711,399713,399714,399715,399717,405295,405387,420382,428261,428263,428272,435637,438047,438048,438049,438056,438060,438062,438063,438064,438066,438067,438068,438070,438073,438074,438075,438076,438077,438078,438079,472761,472762,472764,472766,472768,472769,472772,472773,472781,472785,472786,481773,481775,481778,481779,481780,498847,502611,504034,504036,504037,524062,541356,541357,541358,541359,541361,553180,562685,562688,572168,574007,590503,590954,594042,594047,594049,594052,594053,594059,594060,594061,594062,594063,594064,594065,594066,608824,608831,611016,613053,613187,616453,617883,617886,617889,617904,617905,617906,617907,617908,617909,617911,617912,617913,621751,654085,654091,659089,663151,663153,663195,663221,664719,664941,664942,664943,685633,685634,685635,685636,685648,685649,691310,693168,693169,698960,727386,730414,772515,772516,772517,772518,772815,781945,782089,787924,787925,787926,787927,787928,787929,787930,787932,787933,787934,787935,788194,789935,789973,789974,789975,789976,789977,789978,789979,789980,789981,789982,789983,789984,789985,789986,789987,789988,789989,789990,789991,789992,789993,789994,789995,789996,789998,789999,790000,798258,803812,818614,850813,869267,869269,869270,869273,869274,871506,873429,873430,873431,873432,873433,873434,873435,873436,873437,873438,873441,873442,890138,890139,905960,905961,905962,905963,905964,905968,905969,906926,911183,912555,913746,913747,913748,929440,929441,929442,929444,929445,929446,929447,929448,929449,929450,929451,929452,929453,929454,929455,929456,929458,929459,929466,929467,946048,955107,955205,958954,958955,958956,958957,958958,958959,963565,963587,968955,1061304,1061305,1068155,1068157,1068159,1068161,1068164,1068166,1068167,1068169,1068171,1068172,1068173,1068174,1068175,1068178,1068179,1068189,1068190,1068191,1068193,1068194,1068196,1068198,1068209,1068210,1068211,1068212,1068216,1068217,1069475,1069476,1069477,1135102,1135106,1135107,1135108,1135111,1135114,1141526,1141527,1141529,1142911,1142912,1142913,1165595,1165597,1165598,1165602,1165604,1165606,1165607,1169234,1173551,1187570,1187571,1187572,1187573,1187574,1192583,1192584,1192585,1192586,1192587,1192588,1192589,1192590,1192591,1192592,1192593,1192594,1192595,1192596,1192597,1192598,1192599,1192600,1192602,1210212,1210715,1765636,2048694,2049912,2050655,2050776,2051474,2052128,2052827,2053711,2054255,2054965,2055317,2055619,2055897,2056006,2056036,2056795,2057789,2057857,2057912,2059865,2060513,2060916,2061002,2061451,2062617,2063975,2064078,2064675,2064808,2065096,2065925,2066125,2066511,2067578,2068726,2068782,2069020,2069678,2069801,2070340,2070441,2071881,2072663,2073142,2073826,2073850,2074478,2078221,2078569,2078794,2078795,2078858,2079454,2079920,2080231,2081250,2082343,2083431,2084216,2084472,2084766,2087375,2087751,2087866,2089123,2089527,2089762,2090074,2091235,2091930,2092330,2092370,2092398,2092702,2093469,2094350,2095989,2096261,2096347,2096592,2097974,2098417,2098596,2099557,2100386,2103248,2105949,2106644,2106753,2106934,2108558,2108902,2109343,2109715,2110563,2110703,2115295,2116207,2116310,2116814,2116882,2120336,2121309,2121486,2122504,2122690,2123190,2123630,2124259,2125203,2125520,2125685,2125844,2126970,2127595,2128217,2129397,2131277,2133536,2133834,2133962,2134023,2134549,2135427,2135755,2135896,2136100"><font color="black">JSON</font></a></li> </ul><div style="text-align: center;" class="paginator" id="paginator_example_top"></div><script type="text/javascript">paginator_example_top = new Paginator("paginator_example_top", 80, 25, 1, "/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=&ordermode=desc&filesuns=all&page=" );</script><table class="table  table-striped" id="tablelibgen"><thead><tr>
+
+<th scope="col" class="first_col"><nobr>
+ID <a href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=f_id&ordermode=asc">&#8597</a> 
+Time add. <a href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=time_added&ordermode=asc">&#8597</a> 
+Title <a href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=title&ordermode=asc">&#8597</a> 
+Series <a href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=series&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Author(s) <a href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=author&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Publisher <a href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=publisher&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Year <a href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=year&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col">Language</th>
+<th scope="col">Pages</th>
+<th scope="col"><nobr>Size  <a href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=filesize&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Ext. <a href="/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=extension&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col">Mirrors</th>
+</tr></thead><tbody><tr>
+
+<td><b><a href="series.php?id=396038">Asterix Y Obelix Asterix Y Obelix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 91251<br>Asterix y Obelix Asterix y Obelix 15. Asterix La Cizana" href="edition.php?id=142615709"><i> #15</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 91251<br>Asterix y Obelix Asterix y Obelix 15. Asterix La Cizana" href="edition.php?id=142615709">Asterix La Cizana <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1292234</span></nobr>
+<font size=1 color="gray"><br>Asterix y Obelix Asterix y Obelix 15. Asterix La Cizana <br><b>806x1006px 72dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Spanish</td>
+<td>48</td>
+<td><nobr><a href="/file.php?id=91251">8 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=18233522f06baa0f6ba32929280f56ec"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/18233522f06baa0f6ba32929280f56ec?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=396032">Asterix Y Obelix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 91250<br>Asterix y Obelix Asterix y Obelix 12. Asterix En Bretana" href="edition.php?id=142615683"><i> #12</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 91250<br>Asterix y Obelix Asterix y Obelix 12. Asterix En Bretana" href="edition.php?id=142615683">Asterix En Bretana <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1292233</span></nobr>
+<font size=1 color="gray"><br>Asterix y Obelix Asterix y Obelix 12. Asterix En Bretana <br><b>1144x1628px 72dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Spanish</td>
+<td>45</td>
+<td><nobr><a href="/file.php?id=91250">14 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=26232729388c28fcef98d291c55aa525"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/26232729388c28fcef98d291c55aa525?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=396032">Asterix Y Obelix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 91252<br>Asterix y Obelix Asterix y Obelix 23. Asterix Obelix Y compania" href="edition.php?id=142615691"><i> #23</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 91252<br>Asterix y Obelix Asterix y Obelix 23. Asterix Obelix Y compania" href="edition.php?id=142615691">Asterix Obelix Y Compania <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1292235</span></nobr>
+<font size=1 color="gray"><br>Asterix y Obelix Asterix y Obelix 23. Asterix Obelix Y compania <br><b>871x1137px 72dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Spanish</td>
+<td>48</td>
+<td><nobr><a href="/file.php?id=91252">7 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=44c21c98fe6aaeaca8daa7a5936ced0c"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/44c21c98fe6aaeaca8daa7a5936ced0c?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=335575">Asterix & Obelix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 110171<br>Asterix & Obelix 00 Asterix & Obelix Asterix verovert Rome" href="edition.php?id=142378503"><i> #0</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 110171<br>Asterix & Obelix 00 Asterix & Obelix Asterix verovert Rome" href="edition.php?id=142378503">Asterix Verovert Rome <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 946289</span></nobr>
+<font size=1 color="gray"><br>Asterix & Obelix 00 Asterix & Obelix Asterix verovert Rome <br><b>1425x1800px 300dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Dutch</td>
+<td>34</td>
+<td><nobr><a href="/file.php?id=110171">15 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=45e717e4beabc592769b2d7f6dbdd699"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/45e717e4beabc592769b2d7f6dbdd699?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=335575">Asterix & Obelix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 110225<br>Asterix & Obelix 27 Asterix & Obelix De Zoon van Asterix" href="edition.php?id=142378540"><i> #27</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 110225<br>Asterix & Obelix 27 Asterix & Obelix De Zoon van Asterix" href="edition.php?id=142378540">De Zoon Van Asterix <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 946271</span></nobr>
+<font size=1 color="gray"><br>Asterix & Obelix 27 Asterix & Obelix De Zoon van Asterix <br><b>1428x1800px 200dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Dutch</td>
+<td>49</td>
+<td><nobr><a href="/file.php?id=110225">26 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=d27ccc50025fc4a3c6c27a00790539cc"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/d27ccc50025fc4a3c6c27a00790539cc?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=335573">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 123253<br>Asterix Asterix 03 - Asterix gladiatorem" href="edition.php?id=142378472"><i> #3</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 123253<br>Asterix Asterix 03 - Asterix gladiatorem" href="edition.php?id=142378472">Asterix Gladiatorem <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 946141</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 03 - Asterix gladiatorem <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Dutch</td>
+<td>47</td>
+<td><nobr><a href="/file.php?id=123253">13 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=d4c6f2c6d2994a8d8bd5438af9111f1e"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/d4c6f2c6d2994a8d8bd5438af9111f1e?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=335573">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 123254<br>Asterix Asterix 13 - Asterix a kotlik" href="edition.php?id=142378479"><i> #13</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-23/2022-08-21; ID: 123254<br>Asterix Asterix 13 - Asterix a kotlik" href="edition.php?id=142378479">Asterix A Kotlik <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 946149</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 13 - Asterix a kotlik <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Dutch</td>
+<td>47</td>
+<td><nobr><a href="/file.php?id=123254">14 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=17d26581cbb7e10433cead489b7f43ce"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/17d26581cbb7e10433cead489b7f43ce?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127287<br>Asterix Asterix 02 - Asterix a zlaty srp" href="edition.php?id=142364019"><i> #2</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127287<br>Asterix Asterix 02 - Asterix a zlaty srp" href="edition.php?id=142364019">Asterix A Zlaty Srp <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929136</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 02 - Asterix a zlaty srp <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>45</td>
+<td><nobr><a href="/file.php?id=127287">13 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=6443d51b584dec32fe5194314676ef81"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/6443d51b584dec32fe5194314676ef81?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127288<br>Asterix Asterix 04 - Asterix a GotovE" href="edition.php?id=142364020"><i> #4</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127288<br>Asterix Asterix 04 - Asterix a GotovE" href="edition.php?id=142364020">Asterix A Gotove <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929137</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 04 - Asterix a GotovE <br><b>1024x1513px 200dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>46</td>
+<td><nobr><a href="/file.php?id=127288">13 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=3b5b96ce60ab315c1512ca1b77c0ef50"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/3b5b96ce60ab315c1512ca1b77c0ef50?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127289<br>Asterix Asterix 08 - Asterix a caesaruv vavrinovy venec" href="edition.php?id=142364024"><i> #8</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127289<br>Asterix Asterix 08 - Asterix a caesaruv vavrinovy venec" href="edition.php?id=142364024">Asterix A Caesaruv Vavrinovy Venec <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929141</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 08 - Asterix a caesaruv vavrinovy venec <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>47</td>
+<td><nobr><a href="/file.php?id=127289">13 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=a4b2110dde1e86fec3a016b6e103b90c"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/a4b2110dde1e86fec3a016b6e103b90c?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127291<br>Asterix Asterix 10 - Asterix - Darek od Caesara" href="edition.php?id=142364026"><i> #10</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127291<br>Asterix Asterix 10 - Asterix - Darek od Caesara" href="edition.php?id=142364026">Asterix - Darek Od Caesara <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929143</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 10 - Asterix - Darek od Caesara <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>47</td>
+<td><nobr><a href="/file.php?id=127291">13 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=f4231389c3e89b5bc1437d78c4af8bf6"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/f4231389c3e89b5bc1437d78c4af8bf6?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127292<br>Asterix Asterix 11 - Asterix v Britanii" href="edition.php?id=142364027"><i> #11</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127292<br>Asterix Asterix 11 - Asterix v Britanii" href="edition.php?id=142364027">Asterix V Britanii <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929144</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 11 - Asterix v Britanii <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>47</td>
+<td><nobr><a href="/file.php?id=127292">13 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=bd5434b5bbfe117b8cf8adea9c89efd6"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/bd5434b5bbfe117b8cf8adea9c89efd6?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127293<br>Asterix Asterix 14 - Asterix a Slavny stit" href="edition.php?id=142364028"><i> #14</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127293<br>Asterix Asterix 14 - Asterix a Slavny stit" href="edition.php?id=142364028">Asterix A Slavny Stit <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929145</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 14 - Asterix a Slavny stit <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>47</td>
+<td><nobr><a href="/file.php?id=127293">13 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=5245239a274a693ba72c8a441d9b398d"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/5245239a274a693ba72c8a441d9b398d?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127294<br>Asterix Asterix 16 - Asterix legionarem" href="edition.php?id=142364030"><i> #16</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127294<br>Asterix Asterix 16 - Asterix legionarem" href="edition.php?id=142364030">Asterix Legionarem <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929147</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 16 - Asterix legionarem <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>45</td>
+<td><nobr><a href="/file.php?id=127294">11 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=2863e1ee0e175783b2bfc012cfd47b1e"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/2863e1ee0e175783b2bfc012cfd47b1e?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127295<br>Asterix Asterix 17 - Asterix a zamorska plavba" href="edition.php?id=142364031"><i> #17</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127295<br>Asterix Asterix 17 - Asterix a zamorska plavba" href="edition.php?id=142364031">Asterix A Zamorska Plavba <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929148</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 17 - Asterix a zamorska plavba <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>47</td>
+<td><nobr><a href="/file.php?id=127295">12 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=8177cc1539c1fbe2a3c894c87207566f"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/8177cc1539c1fbe2a3c894c87207566f?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127296<br>Asterix Asterix 18 - Asterix v Hispanii" href="edition.php?id=142364032"><i> #18</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127296<br>Asterix Asterix 18 - Asterix v Hispanii" href="edition.php?id=142364032">Asterix V Hispanii <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929149</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 18 - Asterix v Hispanii <br><b>1024x1513px 200dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>47</td>
+<td><nobr><a href="/file.php?id=127296">13 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=232e56d88dbb024e2abc255ca5b31130"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/232e56d88dbb024e2abc255ca5b31130?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=332741">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127299<br>Asterix Asterix 22 - Asterix a sidliste bohu" href="edition.php?id=142364037"><i> #22</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-24/2022-08-21; ID: 127299<br>Asterix Asterix 22 - Asterix a sidliste bohu" href="edition.php?id=142364037">Asterix A Sidliste Bohu <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 929154</span></nobr>
+<font size=1 color="gray"><br>Asterix Asterix 22 - Asterix a sidliste bohu <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>Czech</td>
+<td>45</td>
+<td><nobr><a href="/file.php?id=127299">9 MB</a></nobr></td>
+<td>rar</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=0f95ea2cc1e42e3a89c3c3b838132c85"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/0f95ea2cc1e42e3a89c3c3b838132c85?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=380297">Astérix (Les)   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2017-10-08/2022-08-21; ID: 786744<br>Astérix -  - Les 12 Travaux d'Astérix (2016) (Hachette Astérix) (digital) (RIP-Club) [1200]" href="edition.php?id=142549589"><i> #12</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2017-10-08/2022-08-21; ID: 786744<br>Astérix -  - Les 12 Travaux d'Astérix (2016) (Hachette Astérix) (digital) (RIP-Club) [1200]" href="edition.php?id=142549589">Travaux d'Astérix <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1188558</span></nobr>
+<font size=1 color="gray"><br>Astérix -  - Les 12 Travaux d'Astérix (2016) (Hachette Astérix) (digital) (RIP-Club) [1200] <br><b>1200x1581px 96dpi</b></font>
+</td>
+<td></td>
+<td><a href="publisher.php?id=12360">Hachette</a></td>
+<td><nobr>2016</nobr></td>
+<td>French</td>
+<td>83</td>
+<td><nobr><a href="/file.php?id=786744">30 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=e63c42a5009906e92e8d3d90b5d56da4"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/e63c42a5009906e92e8d3d90b5d56da4?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=342955">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-14/2022-08-21; ID: 20918<br>Asterix 032 (2003) - asterix and the class act" href="edition.php?id=142415321"><i> #32</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-14/2022-08-21; ID: 20918<br>Asterix 032 (2003) - asterix and the class act" href="edition.php?id=142415321">asterix and the class act <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 999815</span></nobr>
+<font size=1 color="gray"><br>Asterix 032 (2003) - asterix and the class act <br><b>1000x1341px 300dpi</b></font>
+</td>
+<td></td>
+<td><a href="publisher.php?id=41255">Ehapa Verlag</a></td>
+<td><nobr>2003</nobr></td>
+<td>English</td>
+<td>54</td>
+<td><nobr><a href="/file.php?id=20918">24 MB</a></nobr></td>
+<td>cbz</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=3aa4c047551132f71452e016b095f1f1"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/3aa4c047551132f71452e016b095f1f1?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=342952">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43718<br>02 - Asterix -15- Asterix and the Golden Sickle" href="edition.php?id=142415265"><i> #15</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43718<br>02 - Asterix -15- Asterix and the Golden Sickle" href="edition.php?id=142415265">Asterix and the Golden Sickle <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 999740</span></nobr>
+<font size=1 color="gray"><br>02 - Asterix -15- Asterix and the Golden Sickle <br><b>818x1136px 150dpi</b></font>
+</td>
+<td></td>
+<td><a href="publisher.php?id=45525">Orion Books</a></td>
+<td><nobr></nobr></td>
+<td>English</td>
+<td>43</td>
+<td><nobr><a href="/file.php?id=43718">13 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=f3f87e38a9fd17314337a1abb8bb8d37"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/f3f87e38a9fd17314337a1abb8bb8d37?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=342952">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43719<br>03 - Asterix -05- Asterix and the Goths" href="edition.php?id=142415235"><i> #5</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43719<br>03 - Asterix -05- Asterix and the Goths" href="edition.php?id=142415235">Asterix and the Goths <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 999697</span></nobr>
+<font size=1 color="gray"><br>03 - Asterix -05- Asterix and the Goths <br><b>979x1316px 233dpi</b></font>
+</td>
+<td></td>
+<td><a href="publisher.php?id=45525">Orion Books</a></td>
+<td><nobr></nobr></td>
+<td>English</td>
+<td>44</td>
+<td><nobr><a href="/file.php?id=43719">11 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=99499e718d269ff6aaa78fdeaf431645"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/99499e718d269ff6aaa78fdeaf431645?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=342952">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43720<br>04 - Asterix -06- Asterix The Gladiator" href="edition.php?id=142415238"><i> #6</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43720<br>04 - Asterix -06- Asterix The Gladiator" href="edition.php?id=142415238">Asterix The Gladiator <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 999701</span></nobr>
+<font size=1 color="gray"><br>04 - Asterix -06- Asterix The Gladiator <br><b>1000x1235px 200dpi</b></font>
+</td>
+<td></td>
+<td><a href="publisher.php?id=45525">Orion Books</a></td>
+<td><nobr></nobr></td>
+<td>English</td>
+<td>49</td>
+<td><nobr><a href="/file.php?id=43720">22 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=50572203985b7538a6dd2dfb1017379a"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/50572203985b7538a6dd2dfb1017379a?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=342952">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43721<br>05 - Asterix -23- Asterix and the Banquet" href="edition.php?id=142415289"><i> #23</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43721<br>05 - Asterix -23- Asterix and the Banquet" href="edition.php?id=142415289">Asterix and the Banquet <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 999775</span></nobr>
+<font size=1 color="gray"><br>05 - Asterix -23- Asterix and the Banquet <br><b>892x1228px 150dpi</b></font>
+</td>
+<td></td>
+<td><a href="publisher.php?id=45525">Orion Books</a></td>
+<td><nobr></nobr></td>
+<td>English</td>
+<td>45</td>
+<td><nobr><a href="/file.php?id=43721">15 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=2ae2630ab5d5044600534a682f844df0"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/2ae2630ab5d5044600534a682f844df0?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=342952">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43722<br>06 - Asterix -04- Asterix and Cleopatra" href="edition.php?id=142415231"><i> #4</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43722<br>06 - Asterix -04- Asterix and Cleopatra" href="edition.php?id=142415231">Asterix and Cleopatra <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 999693</span></nobr>
+<font size=1 color="gray"><br>06 - Asterix -04- Asterix and Cleopatra <br><b>979x1316px 233dpi</b></font>
+</td>
+<td></td>
+<td><a href="publisher.php?id=45525">Orion Books</a></td>
+<td><nobr></nobr></td>
+<td>English</td>
+<td>45</td>
+<td><nobr><a href="/file.php?id=43722">12 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=5bb55e218c2c73eb6127ef596bf9fdcd"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/5bb55e218c2c73eb6127ef596bf9fdcd?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=342952">Asterix   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43723<br>07 - Asterix -09- Asterix and The Big Fight" href="edition.php?id=142415245"><i> #9</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-17/2022-08-21; ID: 43723<br>07 - Asterix -09- Asterix and The Big Fight" href="edition.php?id=142415245">Asterix and The Big Fight <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 999715</span></nobr>
+<font size=1 color="gray"><br>07 - Asterix -09- Asterix and The Big Fight <br><b>1000x1242px 200dpi</b></font>
+</td>
+<td></td>
+<td><a href="publisher.php?id=45525">Orion Books</a></td>
+<td><nobr></nobr></td>
+<td>English</td>
+<td>49</td>
+<td><nobr><a href="/file.php?id=43723">21 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=7ed41256f3a90446b364c94ff6e9ce5e"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/7ed41256f3a90446b364c94ff6e9ce5e?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr></tbody></table><table>
+  <tr>
+    <td><script>
+	atOptions = {
+		'key' : '80ff16b446cdd16fda9f69edcec465d4',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script src="https://bauval.org/22/80ff16b446cdd16fda9f69edcec465d4"></script>
+
+</td>
+    <td><script>
+	atOptions = {
+		'key' : '80ff16b446cdd16fda9f69edcec465d4',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script src="https://bauval.org/22/80ff16b446cdd16fda9f69edcec465d4"></script>
+
+</td>
+  </tr> 
+</table><div style="text-align: center;" class="paginator" id="paginator_example_bottom"></div><script type="text/javascript">paginator_example_bottom = new Paginator("paginator_example_bottom", 80, 25, 1, "/index.php?req=asterix&objects%5B%5D=f&topics%5B%5D=c&columns%5B%5D=t&columns%5B%5D=a&res=50&curtab=f&order=&ordermode=desc&filesuns=all&page=" );</script><div class="modal fade text-dark" id="googlemodemodal" tabindex="-1" aria-labelledby="googlemodemodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="googlemodemodalLabel">Google mode</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+By default, the search searches for a set of marked fields containing all the words specified in the query in no particular order<br>
+Advanced search mode (Google mode), allows you to set more precise search terms:<br>
+- Quotes: "" - search exactly for the phrase as it is written in the database<br>
+- Mask: * (min 3 chars)- search by part of a word<br>
+- Excluding words: - (minus) - does not display records containing this word, also, these conditions can be combined.<br>
+Example:<br>
+"Physics and Chemistry" Basi * -technology<br>
+means the title of the book contains the exact phrase "Physics and Chemistry", contains the word starting with Basi and does not contain the word technology.<br>
+You can also search for a specific field or view mode that is not displayed for selection in the interface, syntax: field_name:value<br>
+List of add. fields:<br>
+For the Files tab:<br>
+<i>md5</i><br>
+<i>tth</i><br>
+<i>sha1</i><br>
+<i>sha256</i><br>
+<i>crc32</i><br>
+<i>edonkey</i><br>
+<i>doi</i><br>
+
+View modes:<br>
+<i>mode:last</i> - last added entries (for a given object - series, authors, editions, etc.)<br>
+<br>
+<i>fmode:last</i> - last added files (for the given repository)<br>
+<br>
+Add. fields for object "editions" and "files":<br>
+<i>issuevolume</i> - periodical volume<br>
+<i>issuesid</i> - serial ID of the periodical<br>
+<i>issuenumber</i> - the number (within the volume) of the periodical<br>
+<i>issuetnumber</i> is the gross number of the periodical<br>
+<i>issueynumber</i> - intra-annual issue of the periodical<br>
+<i>year</i> - year<br>
+<i>publisherid</i> - Publisher ID<br>
+<i>authorid</i> - Author's ID<br>
+<i>lang</i> - three-letter language code (ISO 639)<br>
+<i>fsize</i> - filesize (MBytes), for example: fsize&gt;10, fsize&lt;20, fsize=15<br>
+<i>ext</i> - File extenstion <br>
+<i>booktopicid</i> - ID of the classifier for books<br>
+<i>tags</i> - Теги (издание, работы, серия)<br>
+<br>
+Add. fields for object "series"<br>
+<i>comtopicid</i> - ID of the classifier for comics<br>
+<i>smtopicid</i> - ID of the classifier for scientific journals<br>
+<i>magtopicid</i> - ID of the classifier for magazines<br>
+<i>issn</i> - ISSN
+
+      </div>
+    </div>
+  </div>
+</div><nav class="navbar sticky-bottom navbar-expand-sm navbar-dark bg-secondary">
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+	    <a class="nav-link" href="#" data-toggle="modal" data-target="#dmcamodal">DMCA</a>
+      </li>
+      <li class="nav-item">
+	    <a class="nav-link" href="#" data-toggle="modal" data-target="#aboutmodal">ABOUT</a>
+      </li>
+      <li class="nav-item">
+	    <a class="nav-link" href="#" data-toggle="modal" data-target="#donatemodal" >DONATE</a>
+      </li>
+	
+    </ul>
+	<span class="navbar-text">Users online 6115</span>
+  </div>
+</nav>
+
+<!-- Modal Donate -->
+<div class="modal fade text-dark" id="donatemodal" tabindex="-1" aria-labelledby="donatemodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="donatemodalLabel">Donate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <a href="bitcoin://bc1qlv9lwa5vncm2jjrxyhddfcvu0z3u5vn0s9672r">Bitcoin</a>
+	<br>
+        <a href="monero:48WhyKv4D9x53SyDFNYuMsHsDzuHXEcht4mWoFtXtE3k4KZ3A7goi3CQWBQQZ3A8PSK7CpwnAFKLnfGiZTAbEpcaCQCghvN">Monero</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal About -->
+<div class="modal fade text-dark" id="aboutmodal" tabindex="-1" aria-labelledby="aboutmodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="aboutmodalLabel">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+<div id="about">
+The Library Genesis aggregator is a community aiming at collecting and cataloging items descriptions for the most part of scientific, 
+scientific and technical directions, as well as file metadata. In addition to the descriptions, 
+the aggregator contains only links to third-party resources hosted by users. 
+All information posted on the website is collected from publicly available public Internet resources and is intended solely for informational purposes.  
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal DMCA -->
+<div class="modal fade text-dark" id="dmcamodal" tabindex="-1" aria-labelledby="dmcamodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dmcamodalLabel">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+<div id="dmca">
+Library Genesis - aggregator items is a website that collects and organizes online items from users. 
+Item aggregation is done for fact-finding purposes, and website Library Genesis respects the rights of copyright holders and respect dcma.
+
+     Removing Content From Library Genesis / DMCA Policy
+     Library Genesis respects the intellectual property of others.
+</div>
+
+    <div class="dmca">
+     If you believe that your copyrighted work has been copied in a way that constitutes copyright infringement and is accessible on this site, you may notify our copyright agent, as set forth in the Digital Millennium Copyright Act of 1998 (DMCA). For your complaint to be valid under the DMCA, you must provide the following information when providing notice of the claimed copyright infringement:
+</div>
+    <div class="dmca">
+     * A physical or electronic signature of a person authorized to act on behalf of the copyright owner Identification of the copyrighted work claimed to have been infringed <br />
+     * Identification of the material that is claimed to be infringing or to be the subject of the infringing activity and that is to be removed <br />
+     * Information reasonably sufficient to permit the service provider to contact the complaining party, such as an address, telephone number, and, if available, an electronic mail address <br />
+     * A statement that the complaining party "in good faith believes that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or law" <br />
+     * A statement that the "information in the notification is accurate", and "under penalty of perjury, the complaining party is authorized to act on behalf of the owner of an exclusive right that is allegedly infringed" <br />
+     The above information must be submitted as a written, faxed or emailed notification to the following Designated Agent: contact@example.invalid. Appeals will be reviewed within 72 hours.</div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.5/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	<script src="/js/form-validation.js"></script>
+	<script>
+$('[data-toggle="tooltip"]').tooltip();
+$('.btn-tooltip-bottom').tooltip({
+    placement: 'bottom'
+});
+</script>
+
+</body>
+</html>

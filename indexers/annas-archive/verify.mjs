@@ -349,6 +349,74 @@ async function rejects(promise) {
   check('audiobook: unsupportedMedium', error?.failure === 'unsupportedMedium' && host.requests.length === 0);
 }
 
+/* --- comics: their own formats, their own collection, archives under their comic name ---------- */
+{
+  const plugin = await loadPlugin();
+  check('declares comic', plugin.mediaKinds.includes('comic'));
+  const field = plugin.settingsFields.find((f) => f.key === 'comicFormats');
+  check('comic formats default to the three comic archives', field?.default === 'cbz,cbr,cb7', field?.default);
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([[ANNAS, () => html(fixture('annas-comics-table.html'))]]);
+  const releases = await plugin.search(query({ title: 'La Zizanie', author: null, mediaKind: 'comic' }), config(), host, undefined);
+  const url = new URL(host.requests[0].url);
+  check('comic annas: content filter sent', url.searchParams.get('content') === 'book_comic', url.href);
+  check('comic annas: archive extensions asked too', url.searchParams.getAll('ext').join() === 'cbz,cbr,cb7,rar,zip,7z', url.searchParams.getAll('ext').join());
+  check('comic annas: four comic rows kept', releases.length === 4, releases.map((r) => `${r.guid.slice(0, 2)}:${r.format}`).join());
+  check('comic annas: rar offered as cbr', releases.find((r) => r.guid.startsWith('c2'))?.format === 'cbr');
+  check('comic annas: zip offered as cbz', releases.find((r) => r.guid.startsWith('c4'))?.format === 'cbz');
+  check('comic annas: pdf left out by default', !releases.some((r) => r.format === 'pdf'));
+  check('comic annas: an ebook row is not a comic', !releases.some((r) => r.guid.startsWith('c6')));
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([[ANNAS, () => html(fixture('annas-comics-table.html'))]]);
+  const releases = await plugin.search(query({ mediaKind: 'comic' }), config({ settings: { comicFormats: 'cbz, pdf' } }), host, undefined);
+  check('comic formats: configured list and its aliases sent', new URL(host.requests[0].url).searchParams.getAll('ext').join() === 'cbz,pdf,zip');
+  check('comic formats: pdf kept when chosen, cbr dropped', releases.map((r) => r.format).sort().join() === 'cbz,cbz,pdf', releases.map((r) => r.format).join());
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([[ANNAS, () => html(fixture('annas-search-table.html'))]]);
+  await plugin.search(query(), config(), host, undefined);
+  check('ebook annas: no content filter', !new URL(host.requests[0].url).searchParams.has('content'));
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([
+    [ANNAS, () => html(fixture('ddos-guard-captcha.html'), 403, { server: 'ddos-guard' })],
+    [LIBGEN, () => html(fixture('libgen-comics.html'))],
+  ]);
+  const releases = await plugin.search(query({ title: 'Asterix', author: null, mediaKind: 'comic', limit: 50 }), config(), host, undefined);
+  const libgen = new URL(host.requests.find((r) => LIBGEN.test(r.url)).url);
+  const first = releases.find((r) => r.guid === releases[0]?.guid);
+  check('comic libgen: comics collection only', libgen.searchParams.getAll('topics[]').join() === 'c', libgen.searchParams.getAll('topics[]').join());
+  check('comic libgen: every row read', releases.length === 25, `got ${releases.length}`);
+  check('comic libgen: only comic formats', releases.every((r) => ['cbz', 'cbr', 'cb7'].includes(r.format)), [...new Set(releases.map((r) => r.format))].join());
+  check('comic libgen: rar rows offered as cbr', releases.filter((r) => r.format === 'cbr').length === 24);
+  check('comic libgen: series, number and album title', first?.title === 'Asterix Y Obelix #15 - Asterix La Cizana', first?.title);
+  check('comic libgen: album title is what gets scored', first?.bookTitle === 'Asterix La Cizana', first?.bookTitle);
+  check('comic libgen: no title is just an issue number', !releases.some((r) => r.title.startsWith('#')));
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([
+    [ANNAS, () => html(fixture('ddos-guard-captcha.html'), 403, { server: 'ddos-guard' })],
+    [LIBGEN, () => html(fixture('libgen-dune.html'))],
+  ]);
+  await plugin.search(query(), config(), host, undefined);
+  const libgen = new URL(host.requests.find((r) => LIBGEN.test(r.url)).url);
+  check('ebook libgen: fiction and non-fiction collections', libgen.searchParams.getAll('topics[]').join() === 'l,f');
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([['libgen.download/api/download', () => new Response('Rar!', { status: 200 })]]);
+  const comic = { guid: 'c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2c2', title: 'Astérix - La Zizanie', format: 'cbr', sizeBytes: 88_000_000, seeders: null, leechers: null };
+  const file = await plugin.resolveFile(comic, config(), host, undefined);
+  check('comic resolve: saved under the comic extension', file.fileName === 'Astérix - La Zizanie.cbr' && file.format === 'cbr', file.fileName);
+}
+
 /* --- resolveFile ------------------------------------------------------------------------------ */
 const release = { guid: '805290ae7791f6fa5fabf9128f12e632', title: 'Sisterhood of Dune: Brian Herbert', format: 'epub', sizeBytes: 695_000, seeders: null, leechers: null };
 const serviceServes = () => new Response('PK\u0003\u0004', { status: 200, headers: { 'content-type': 'application/epub+zip' } });

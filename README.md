@@ -1,12 +1,13 @@
 # Anna's Archive for BookOrbit
 
 An indexer plugin that lets [BookOrbit](https://github.com/bookorbit/bookorbit) search
-[Anna's Archive](https://annas-archive.gl) for ebooks, with Library Genesis as a fallback
-catalogue. It is one dependency-free file with signed updates.
+[Anna's Archive](https://annas-archive.gl) for ebooks and comics, with Library Genesis as a
+fallback catalogue. It is one dependency-free file with signed updates.
 
 | Media | Credential | Grabs |
 | --- | --- | --- |
 | ebook | optional Anna's Archive account key | direct file |
+| comic | optional Anna's Archive account key | direct file |
 
 Which sources you point BookOrbit at, and whether you are entitled to what they hold, is your
 decision and your responsibility.
@@ -38,6 +39,20 @@ An empty result from Anna's Archive ("No files found") counts as a real answer a
 nothing. A page whose layout the plugin cannot read does not: it falls back to Library Genesis,
 so a markup change never looks like "this book does not exist".
 
+## Comics
+
+A comic request is searched like an ebook request, with three differences:
+
+- **Anna's Archive** is asked for its *Comic book* content type (`content=book_comic`).
+- **Library Genesis** is asked for its Comics collection instead of the fiction and non-fiction
+  ones. A comic's title there is the series, the issue number and the album title; the release is
+  shown as `Asterix #15 - La Zizanie` and scored on the album title, which is what a request names.
+- Both catalogues list many comics under the plain archive extension. A `.rar` is offered as
+  `cbr`, a `.zip` as `cbz` and a `.7z` as `cb7`, which is what they are: BookOrbit counts only the
+  comic names as comic formats, and the saved file is named after the format.
+
+Audiobooks are still refused, as `unsupportedMedium`.
+
 ## Installing
 
 In BookOrbit, open **Settings > System > Requests**, choose to install a plugin, and give it
@@ -62,6 +77,7 @@ click **Test**. The test reports which catalogue answered and whether your key w
 | Search Library Genesis when blocked | on | Turn off to see the protection error instead. |
 | Library Genesis mirrors | `libgen.li`, `libgen.bz` | Tried in order. |
 | Ebook formats | epub, mobi, azw3, fb2 | `azw`, `djvu` and `pdf` can be added. |
+| Comic formats | cbz, cbr, cb7 | `pdf` can be added. `.rar`, `.zip` and `.7z` files are offered under their comic name. |
 | Accepted languages | empty (all) | ISO codes such as `en, fr`. Results stated in another language are dropped; results with no stated language are kept, as BookOrbit's own scoring keeps them. Also sent to Anna's Archive as its language filter. |
 
 BookOrbit gives each indexer 20 seconds. A FlareSolverr solve takes 5 to 30 seconds, so the

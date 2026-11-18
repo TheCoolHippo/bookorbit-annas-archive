@@ -28,6 +28,15 @@ const LIBGEN_DOWNLOAD_ORIGIN = 'https://libgen.download';
 
 const DEFAULT_EBOOK_FORMATS = 'epub,mobi,azw3,fb2';
 const ALLOWED_FORMATS = ['epub', 'mobi', 'azw', 'azw3', 'fb2', 'djvu', 'pdf'];
+const DEFAULT_COMIC_FORMATS = 'cbz,cbr,cb7';
+const ALLOWED_COMIC_FORMATS = ['cbz', 'cbr', 'cb7', 'pdf'];
+/**
+ * Both catalogues list many comics under the plain archive extension. A .cbr is a .rar under
+ * another name, but BookOrbit only counts the comic names as comic formats ("rar is not a comic
+ * format"), and it names the saved file after the format, so the release has to say cbr.
+ */
+const COMIC_ARCHIVE_ALIASES = { rar: 'cbr', zip: 'cbz', '7z': 'cb7' };
+const MEDIA_KINDS = ['ebook', 'comic'];
 
 /** A full result page of markup, with room to spare. Nothing is buffered past this. */
 const MAX_PAGE_BYTES = 4 * 1024 * 1024;
@@ -115,7 +124,7 @@ function looksLikeAnnasArchive(html) {
 
 export default {
   apiVersion: 1,
-  version: '1.1.1',
+  version: '1.2.0',
   update: {
     manifestUrl: 'https://raw.githubusercontent.com/TheCoolHippo/bookorbit-annas-archive/main/updates/annas-archive.json',
     ed25519PublicKey: 'OlmPIog8s2G128FNUXGEIWoAsok_yUqQvHFK9T_1L-M',
@@ -128,7 +137,7 @@ export default {
    */
   requiresCredential: false,
   credentialKind: 'apiKey',
-  mediaKinds: ['ebook'],
+  mediaKinds: MEDIA_KINDS,
   supportsIsbnSearch: true,
   usesCategories: false,
   /** Nothing is seeded back, so a seed goal here would be a number that means nothing. */
@@ -186,13 +195,23 @@ export default {
       options: ALLOWED_FORMATS,
       minItems: 1,
     },
+    {
+      key: 'comicFormats',
+      type: 'string',
+      label: 'Comic formats',
+      hint: 'Results in other formats are dropped. Comics listed as .rar, .zip or .7z are offered as cbr, cbz and cb7, which is what they are.',
+      default: DEFAULT_COMIC_FORMATS,
+      format: 'list',
+      options: ALLOWED_COMIC_FORMATS,
+      minItems: 1,
+    },
   ],
 
   async search(query, config, host, signal) {
-    if (query.mediaKind !== 'ebook') {
-      throw host.fail('unsupportedMedium', `Anna's Archive is searched for ebooks only, not ${query.mediaKind}s`);
+    if (!MEDIA_KINDS.includes(query.mediaKind)) {
+      throw host.fail('unsupportedMedium', `Anna's Archive is searched for ebooks and comics only, not ${query.mediaKind}s`);
     }
-    const formats = configuredFormats(config);
+    const formats = wantedFormats(query.mediaKind, config);
     const started = Date.now();
     const remaining = () => SEARCH_BUDGET_MS - (Date.now() - started);
 
@@ -223,7 +242,7 @@ export default {
   async test(config, host) {
     const notes = [];
     try {
-      const formats = configuredFormats(config);
+      const formats = wantedFormats('ebook', config);
       const probe = { title: 'dune', author: 'frank herbert', isbn13: null, isbn13s: [], mediaKind: 'ebook', language: null, limit: 5 };
       const started = Date.now();
       const remaining = () => SEARCH_BUDGET_MS - (Date.now() - started);
@@ -371,7 +390,8 @@ function annasSearchUrl(mirror, query, formats, accepted = []) {
   url.searchParams.set('display', 'table');
   url.searchParams.append('acc', 'aa_download');
   url.searchParams.append('acc', 'external_download');
-  for (const format of formats) url.searchParams.append('ext', format);
+  for (const ext of formats.sourceExts) url.searchParams.append('ext', ext);
+  if (formats.mediaKind === 'comic') url.searchParams.set('content', 'book_comic');
 
   const isbn = /^\d{13}$/.test(query.isbn13 ?? '') ? query.isbn13 : null;
   url.searchParams.set('q', isbn ?? '');
@@ -488,8 +508,8 @@ function annasRelease(row, formats) {
   if (!md5) return null;
 
   const title = firstSpanOwnText(cells[AA.title]);
-  const format = firstSpanText(cells[AA.format]).toLowerCase();
-  if (!title || !format || !formats.includes(format)) return null;
+  const format = formatOf(firstSpanText(cells[AA.format]), formats);
+  if (!title || !format) return null;
   // Catalogue descriptors that some imported records carry in place of a title.
   if (title.includes('/') && title.length < 40 && !/\d/.test(title)) return null;
 
@@ -630,6 +650,8 @@ const LG = { title: 0, author: 1, year: 3, language: 4, size: 6, format: 7 };
 const LIBGEN_PAGE_SIZE = 50;
 const LIBGEN_MD5_IN_HREF = /(?:ads|get)\.php\?md5=([a-f0-9]{32})/i;
 const LIBGEN_ROW_ISBNS = /<font[^>]*color=["']green["'][^>]*>([^<]*)<\/font>/i;
+/** The non-fiction (l) and fiction (f) collections for ebooks; comics are a collection of their own. */
+const LIBGEN_TOPICS = { ebook: ['l', 'f'], comic: ['c'] };
 
 /**
  * The ISBN first when the request states one, then title and author. One page each: this is the
@@ -648,7 +670,7 @@ async function searchLibgen(query, config, formats, host, signal, remaining) {
   for (const pass of passes) {
     if (releases.length >= query.limit || signal?.aborted || remaining() <= 0) break;
     try {
-      const html = await readLibgenPage(host, config, pass);
+      const html = await readLibgenPage(host, config, pass, formats.mediaKind);
       for (const release of libgenReleases(html, formats)) {
         if (seen.has(release.guid) || !languagesAgree(query.language, release.language)) continue;
         if (!languageAccepted(accepted, release.language)) continue;
@@ -667,14 +689,13 @@ async function searchLibgen(query, config, formats, host, signal, remaining) {
 }
 
 /** Tries each mirror in turn: they share a catalogue and fail independently. */
-async function readLibgenPage(host, config, pass) {
+async function readLibgenPage(host, config, pass, mediaKind) {
   const failures = [];
   for (const mirror of libgenMirrorsOf(config)) {
     const url = new URL('/index.php', mirror);
     url.searchParams.set('req', pass.req);
     url.searchParams.append('objects[]', 'f');
-    url.searchParams.append('topics[]', 'l');
-    url.searchParams.append('topics[]', 'f');
+    for (const topic of LIBGEN_TOPICS[mediaKind] ?? LIBGEN_TOPICS.ebook) url.searchParams.append('topics[]', topic);
     for (const column of pass.columns) url.searchParams.append('columns[]', column);
     url.searchParams.set('res', String(LIBGEN_PAGE_SIZE));
     try {
@@ -713,9 +734,10 @@ function libgenRelease(row, formats) {
   const md5 = LIBGEN_MD5_IN_HREF.exec(row)?.[1]?.toLowerCase();
   if (!md5) return null;
 
-  const heading = firstAnchorText(cells[LG.title], 'edition.php');
-  const format = cellText(cells[LG.format]).toLowerCase();
-  if (!heading || !format || !formats.includes(format)) return null;
+  const comic = formats.mediaKind === 'comic' ? comicHeading(cells[LG.title]) : null;
+  const heading = comic ? '' : firstAnchorText(cells[LG.title], 'edition.php');
+  const format = formatOf(cellText(cells[LG.format]), formats);
+  if ((!comic && !heading) || !format) return null;
 
   const author = cleanAuthor(cellText(cells[LG.author]));
   const language = languageCode(cellText(cells[LG.language]));
@@ -723,7 +745,7 @@ function libgenRelease(row, formats) {
 
   return {
     guid: md5,
-    ...readTitle(heading.replace(/\s*;\s*/g, ': ')),
+    ...(comic ?? readTitle(heading.replace(/\s*;\s*/g, ': '))),
     sizeBytes: parseSize(cellText(cells[LG.size])),
     seeders: null,
     leechers: null,
@@ -734,6 +756,35 @@ function libgenRelease(row, formats) {
     primaryFileCount: 1,
     fileCount: 1,
   };
+}
+
+/**
+ * A comic's title cell names the series, then links the same edition twice: once as the issue
+ * number, once as the issue's own title.
+ *
+ *   <a series.php>Asterix</a><a edition.php><i>#15</i></a> <br> <a edition.php>La Zizanie</a>
+ *
+ * Read like a book's, by its first edition link, every comic would be called "#15". The album
+ * title is what a request names, so it is what gets scored; the series and number are shown.
+ */
+function comicHeading(cell) {
+  const series = undouble(anchorTexts(cell, 'series.php')[0] ?? '');
+  const editions = anchorTexts(cell, 'edition.php').filter(Boolean);
+  const issue = editions.find((text) => /^#\s*\S+$/.test(text))?.replace(/^#\s*/, '') ?? '';
+  const name = editions.find((text) => !text.startsWith('#')) ?? '';
+  const title = [series && issue ? `${series} #${issue}` : series, name].filter(Boolean).join(' - ');
+  if (!title) return null;
+  const bare = stripParentheticals(name || series);
+  return { title, ...(bare && bare !== title ? { bookTitle: bare } : {}) };
+}
+
+/** Library Genesis prints some series names twice over: "Asterix Y Obelix Asterix Y Obelix". */
+function undouble(value) {
+  const words = value.trim().split(/\s+/);
+  const half = words.length / 2;
+  if (words.length < 2 || !Number.isInteger(half)) return value.trim();
+  const first = words.slice(0, half).join(' ');
+  return first.toLowerCase() === words.slice(half).join(' ').toLowerCase() ? first : value.trim();
 }
 
 /**
@@ -763,12 +814,32 @@ function rowIsbns(cell) {
  * Configuration
  * ------------------------------------------------------------------------------------------- */
 
-function configuredFormats(config) {
-  const raw = config.settings?.ebookFormats;
-  const formats = splitList(typeof raw === 'string' && raw.trim() ? raw : DEFAULT_EBOOK_FORMATS)
+/**
+ * What a search for this medium accepts: the formats a release may be offered in, and the file
+ * extensions to ask the catalogues for, which for comics also include the plain archive names.
+ */
+function wantedFormats(mediaKind, config) {
+  const comic = mediaKind === 'comic';
+  const raw = comic ? config.settings?.comicFormats : config.settings?.ebookFormats;
+  const fallback = comic ? DEFAULT_COMIC_FORMATS : DEFAULT_EBOOK_FORMATS;
+  const allowed = comic ? ALLOWED_COMIC_FORMATS : ALLOWED_FORMATS;
+  let formats = splitList(typeof raw === 'string' && raw.trim() ? raw : fallback)
     .map((format) => format.toLowerCase().replace(/^\./, ''))
-    .filter((format, index, all) => ALLOWED_FORMATS.includes(format) && all.indexOf(format) === index);
-  return formats.length ? formats : splitList(DEFAULT_EBOOK_FORMATS);
+    .filter((format, index, all) => allowed.includes(format) && all.indexOf(format) === index);
+  if (!formats.length) formats = splitList(fallback);
+
+  const sourceExts = [...formats];
+  if (comic) {
+    for (const [ext, format] of Object.entries(COMIC_ARCHIVE_ALIASES)) if (formats.includes(format)) sourceExts.push(ext);
+  }
+  return { mediaKind: comic ? 'comic' : 'ebook', formats, sourceExts };
+}
+
+/** The format a release is offered in, or null when this search does not want it. */
+function formatOf(raw, wanted) {
+  const stated = String(raw ?? '').trim().toLowerCase().replace(/^\./, '');
+  const format = wanted.mediaKind === 'comic' ? (COMIC_ARCHIVE_ALIASES[stated] ?? stated) : stated;
+  return format && wanted.formats.includes(format) ? format : null;
 }
 
 /** The main address first, then the fallbacks, each once. */
@@ -1046,6 +1117,23 @@ function firstSpanOwnText(cell) {
   const stop = rest.search(/<\/?span\b/i);
   const own = stripTags(stop === -1 ? rest : rest.slice(0, stop));
   return own || firstSpanText(cell);
+}
+
+/** The text of every link whose opening tag contains `needle`, in order. */
+function anchorTexts(cell, needle) {
+  const texts = [];
+  if (cell === undefined) return texts;
+  const opens = /<a\b/gi;
+  let match;
+  while ((match = opens.exec(cell)) !== null) {
+    const open = tagEnd(cell, match.index);
+    if (open === -1) break;
+    const close = cell.toLowerCase().indexOf('</a>', open);
+    if (close === -1) break;
+    if (cell.slice(match.index, open + 1).includes(needle)) texts.push(stripTags(cell.slice(open + 1, close)));
+    opens.lastIndex = close;
+  }
+  return texts;
 }
 
 function firstAnchorText(cell, needle) {
