@@ -65,6 +65,16 @@ A comic request is searched like an ebook request, with three differences:
   `cbr`, a `.zip` as `cbz` and a `.7z` as `cb7`, which is what they are: BookOrbit counts only the
   comic names as comic formats, and the saved file is named after the format.
 
+- Library Genesis prints comic credits with roles and placeholders
+  (`Mandryka, Nikita (sc.); {Quadrichromie} (col.)`). They are cleaned to the writers and artists,
+  first name first; colourists, cover artists, letterers and anything in braces are dropped. With
+  the roles left in, BookOrbit's author match lost twelve points.
+- The compared title keeps the series when the request names it ("Le Concombre masqué - Tome 2 -
+  …") and is the album alone otherwise. BookOrbit compares both ways, so this is what scores best.
+- Volume markers (`Tome 2`, `T. 2`, `Vol. 2`, `#2`) and separators are left out of the search text,
+  because Library Genesis wants every word. When that still finds nothing, the album title alone is
+  searched.
+
 Audiobooks are still refused, as `unsupportedMedium`.
 
 ## Installing

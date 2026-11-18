@@ -1,0 +1,1045 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="max-age=604800, must-revalidate">
+	<meta name="rating" content="general">
+	<!--<link href="/rss/index.php" rel="alternate" type="application/rss+xml" title="News" />-->
+	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+	<title>Library Genesis</title>
+		
+	<!--[if IE 6]>
+	<style>
+		body {behavior: url("/csshover3.htc");}
+		#menu li .drop {background:url("img/drop.gif") no-repeat right 8px; 
+	</style>
+	<![endif]-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">	
+	
+<link href="/css/font.min.css" rel="stylesheet">	
+<style>
+nav.navbar .dropdown:hover > .dropdown-menu {
+ display: block; 
+}
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+			font-size: 3.5rem;
+		}
+	}
+
+.panel-heading .accordion-toggle:after {
+    font-family: "Glyphicons Halflings";  
+    content: "\e114";    
+    float: right;       
+    color: grey;         
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    content: "\e080";   
+}
+.tooltip-inner {
+    max-width: 350px;
+    width: 350px; 
+}
+h1 {
+	display: block; 
+	font-size: 1.8rem; 
+	font-weight: bold; 
+	font-family: Georgia, "Times New Roman", Times, serif;  color: #A00000; 
+}
+#tablelibgen td { 
+	font-family: "Pt Sans", Tahoma, Helvetica, sans-serif; 
+	margin: 0; 
+	padding: 0em 3px; 
+	font-size: 1rem;
+}
+
+#tablelibgen1 td { 
+	font-family: "Pt Sans", Tahoma, Helvetica, sans-serif; 
+	margin: 0; 
+	padding: 0em 3px; 
+	font-size: 1rem;
+}
+
+.taghide {
+    display: none; 
+}
+.taghide + label ~ div {
+    display: none;
+}
+/* оформляем текст label */
+.taghide + label {
+    display: inline-block; 
+}
+/* вид текста label при активном переключателе */
+
+/* когда чекбокс активен показываем блоки с содержанием  */
+.taghide:checked + label + div {
+    display: block; 
+}
+
+
+
+/*.navbar {
+	background-color: #BBBBBB;
+}*/
+	</style>
+
+	<link rel="stylesheet" href="/css/dark-mode.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../css/paginator3000.css" />
+<script type="text/javascript" src="../js/paginator3000.js"></script><script data-cfasync="false" async type="text/javascript" src="//je.deuxseethe.com/rUJqARoMIAl18z/146156"></script>
+
+
+
+
+</head>
+<body>    
+<nav class="navbar navbar-expand-md navbar-dark bg-secondary  mb-1">
+  
+   <a class="navbar-brand" href="/index.php">
+    <img src="/img/logo.png"  height="30" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/community/app.php/article/news">NEWS <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/community/">FORUM <span class="sr-only">(current)</span></a>
+      </li>
+	
+      <li class="nav-item dropdown">
+<a class="btn btn-secondary dropdown-toggle" href="/community/ucp.php?mode=login" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          LOGIN
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">    
+          <a class="dropdown-item" href="/community/ucp.php?mode=register">Register</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          DOWNLOAD
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">      
+
+          <a class="dropdown-item" href="/mirrors.php">Mirrors</a>
+          <a class="dropdown-item" href="http://libgenfrialc7tguyjywa36vtrdcplwpxaw43h6o63dmmwhvavo5rqqd.onion/">TOR</a>
+
+	<div class="dropdown-divider"></div>
+         <h6 class="dropdown-header">P2P</h6>
+          <a class="dropdown-item" href="/torrents/">Torrents</a>
+          <a class="dropdown-item" href="https://ipdl.cat/data/torrents.html">Torrents status</a>
+          <a class="dropdown-item" href="/nzb/">Usenet (*.nzb)</a>
+          <a class="dropdown-item" href="/soft/">Soft</a>
+	<!--https://phillm.net/libgen-stats-table.php-->
+
+
+
+
+	<div class="dropdown-divider"></div>
+         <h6 class="dropdown-header">DB Dumps</h6>
+          <a class="dropdown-item" href="/dirlist.php?dir=dbdumps">Libgen</a>
+          <a class="dropdown-item" href="http://libgen.rs/dbdumps/">libgen.rs (gen.lib.rus.ec)</a>
+
+	<!--<div class="dropdown-divider"></div>
+ 	 <a class="dropdown-item" href="/magz0/">Unsorted magz</a>
+ 	 <a class="dropdown-item" href="/fict0/">Unsorted fiction</a>
+
+	 <a class="dropdown-item" href="/comics4/">Unsorted comics</a>
+        </div>-->
+
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="librarian.php" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          UPLOAD
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">  
+          <a class="dropdown-item" href="ftp://ftp.libgen.bz/upload/">FTP</a> 
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="/index.php?req=fmode:last&topics1=all" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          LAST
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+	<a class="dropdown-item" href="/index.php?req=fmode:last&topics1=all"><b>Files</b></a>
+
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=l">Libgen</a>
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=a">Scientific Articles</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=f">Fiction</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=c">Comics</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=m">Magazines</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=s">Standards</a> 
+          <a class="dropdown-item" href="/index.php?req=fmode:last&topics%5B%5D=r">Fiction RUS</a>
+	<div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=e">Editions</a> 
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=s">Series</a>
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=p">Publishers</a> 
+        <!--  <a class="dropdown-item" href="/index.php?req=mode:last&curtab=f">Files</a> -->
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=a">Authors</a> 
+          <a class="dropdown-item" href="/index.php?req=mode:last&curtab=w">Works</a>
+
+
+  
+        </div>
+
+
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          OTHERS
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">  
+          <a class="dropdown-item" href="json.php">API</a> 
+          <a class="dropdown-item" href="rss.php">RSS</a> 
+          <a class="dropdown-item" href="top.php">Top 100 users</a> 
+          <a class="dropdown-item" href="stat.php">Stats</a>
+
+	<a class="dropdown-item" href="topics.php">Topics</a>
+
+          <a class="dropdown-item" href="batchsearchindex.php">Batch search</a>  
+          <a class="dropdown-item" href="biblioservice.php">Bibliographic services</a>
+          <a class="dropdown-item" href="https://wiki.mhut.org/software:libgen_desktop">Libgen librarian for desktop</a>
+
+
+          <a class="dropdown-item" href="/code/">Source (PHP)</a>
+          <a class="dropdown-item" href="/soft/">LG soft</a>
+          <!--<a class="dropdown-item" href="/import/">Import local files in LG format</a>-->
+          <a class="dropdown-item" href="https://z-library.se/fulltext/">Full text search</a>
+
+
+
+        </div>
+      </li>
+
+
+
+     <!-- <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="topics.php" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          Topics
+        </a>
+      </li>
+-->
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          LINKS
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">  
+
+
+          
+          <a class="dropdown-item" href="http://sci-hub.ru">Sci-hub</a> 
+          <a class="dropdown-item" href="http://magzdb.org">Magzdb.org</a>
+
+          <a class="dropdown-item" href="http://nlr.ru/rlin/Periodika_rus.php">РНБ</a>
+          <a class="dropdown-item" href="http://rsl.ru/">РГБ</a>
+          <a class="dropdown-item" href="http://loc.gov/">LOC</a>
+          <a class="dropdown-item" href="https://comicvine.gamespot.com/">ComicVine</a>
+          <a class="dropdown-item" href="http://cyberleninka.ru/">Cyberleninka</a>
+          <a class="dropdown-item" href="http://lib.rus.ec/">Lib.rus.ec</a>
+          <a class="dropdown-item" href="http://flibusta.is/">Flibusta.is</a>
+          <a class="dropdown-item" href="http://goodreads.com/">Goodreads.com</a>
+          <a class="dropdown-item" href="http://worldcat.org/">Worldcat.org</a>
+          <a class="dropdown-item" href="https://wiki.archiveteam.org/">Archive team</a>
+          <a class="dropdown-item" href="https://www.reddit.com/r/libgen/">Reddit</a>
+          <a class="dropdown-item" href="http://annas-archive.org/">Anna's Archive</a>
+          <a class="dropdown-item" href="https://welib.org/">Welib</a>
+          <a class="dropdown-item" href="https://open-slum.org/">The Shadow Library Uptime Monitor</a>
+
+        </div>
+
+      </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-secondary" href="index.php?req=mode:req&curtab=e" role="button" id="dropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+          WANTED
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="nav-link">
+
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="darkSwitch">
+      <label class="custom-control-label" for="darkSwitch">🌓</label>
+    </div>
+    <script src="/js/dark-mode-switch.js"></script>
+  </div>
+   <a class="navbar-brand" href="setlang.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&lang=ru">RU</a>
+</nav>
+<form class="card p-2 needs-validation" novalidate id="formlibgen" action="index.php" enctype="multipart/form-data" METHOD="GET">
+<div class="input-group mb-3" >
+	<input autofocus type="text" class="form-control" placeholder="Input value" name="req" aria-label="input text" aria-describedby="button-addon2" value="Concombre" required>
+	<div class="input-group-append">
+	<button class="btn btn-outline-secondary"  id="button-addon2" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&#128269;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+	</div>
+
+	<div class="invalid-feedback">Input value</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-8">	
+			<div class="d-block" id="topic">
+				<strong>Search in fields:</strong>
+				<input type="checkbox" checked class="column-input" id="colt" name="columns[]" value="t">
+				<label class="column-label" for="coltitle">Title</label>
+				<input type="checkbox" checked class="column-input" id="cola" name="columns[]" value="a">
+				<label class="column-label" for="colauthor">Author(s)</label>
+				<input type="checkbox"  class="column-input" id="cols" name="columns[]" value="s">
+				<label class="column-label" for="colseries">Series</label>
+				<input type="checkbox"  class="column-input" id="coly" name="columns[]" value="y">
+				<label class="column-label" for="colyear">Year</label>
+				<input type="checkbox"  class="column-input" id="colp" name="columns[]" value="p">
+				<label class="column-label" for="colpublisher">Publisher</label>
+				<input type="checkbox"  class="column-input" id="coli" name="columns[]" value="i">
+				<label class="column-label" for="colisbn">ISBN</label>
+	  		</div>
+	
+	  		<div class="d-block" id="object">
+				<strong>Search in objects:</strong>
+				<input type="checkbox" checked class="column-input" id="objf" name="objects[]" value="f">
+				<label class="column-label" for="objf">Files</label>
+				<input type="checkbox"  class="column-input" id="obje" name="objects[]" value="e">
+				<label class="column-label" for="obje">Editions</label>
+				<input type="checkbox"  class="column-input" id="objs" name="objects[]" value="s">
+				<label class="column-label" for="objs">Series</label>
+				<input type="checkbox"  class="column-input" id="obja" name="objects[]" value="a">
+				<label class="column-label" for="obja">Authors</label>
+				<input type="checkbox"  class="column-input" id="objp" name="objects[]" value="p">
+				<label class="column-label" for="objp">Publishers</label>
+				<input type="checkbox"  class="column-input" id="objw" name="objects[]" value="w">
+				<label class="column-label" for="objw">Works</label>
+			</div>
+			<div class="d-block" id="column">
+				<strong>Search in topics :</strong>
+				<input type="checkbox"  class="column-input" id="topl" name="topics[]" value="l" >
+				<label class="column-label" for="topl">Libgen</label>
+				<input type="checkbox" checked class="column-input" id="topc" name="topics[]" value="c" >
+				<label class="column-label" for="topc">Comics</label>
+				<input type="checkbox"  class="column-input" id="topf" name="topics[]" value="f" >
+				<label class="column-label" for="topf">Fiction</label>
+				<input type="checkbox"  class="column-input" id="topa" name="topics[]" value="a" >
+				<label class="column-label" for="topa">Scientific Articles</label>
+				<input type="checkbox"  class="column-input" id="topm" name="topics[]" value="m" >
+				<label class="column-label" for="topm">Magazines</label>
+				<input type="checkbox"  class="column-input" id="topr" name="topics[]" value="r" >
+				<label class="column-label" for="topr">Fiction RUS</label>
+				<input type="checkbox"  class="column-input" id="tops" name="topics[]" value="s" >
+				<label class="column-label" for="tops">Standards</label>
+			</div>
+ 		</div>
+		<div class="col-4">
+
+			<!--<div >
+				<strong>Results per page:</strong>
+
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="res25" name="res" class="custom-control-input" value="25" checked>
+				<label class="custom-control-label" for="res25">25</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="res50" name="res" class="custom-control-input" value="50" >
+				<label class="custom-control-label" for="res50">50</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="res100" name="res" class="custom-control-input" value="100" >
+				<label class="custom-control-label" for="res100">100</label>
+
+				</div>
+ 			</div>
+			-->
+			<div class="d-block">
+				<table><tr><td>
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="covers" name="covers" >
+						<label class="custom-control-label" for="covers"><strong>Show Covers</strong></label>
+						<script type="text/javascript">
+						$("input[id=covers]").change(function(){
+							if($(this).is(":checked")==false)
+							{
+								document.cookie = "covers=; expires=Thu 01-Jan-70 00:00:01 GMT;";
+							}
+						});				
+						</script>
+					</div>
+					</td><td> 
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="showch" name="showch" >
+						<label class="custom-control-label" for="showch"><strong>Show chapters</strong></label>
+						<script type="text/javascript">
+						$("input[id=showch]").change(function(){
+							if($(this).is(":checked")==false)
+							{
+								document.cookie = "showch=; expires=Thu 01-Jan-70 00:00:01 GMT;";
+							}
+						});				
+						</script>
+					</div>
+				</td></tr></table>
+
+ 			</div>
+
+			<div class="d-block">
+
+				<div class="custom-control custom-switch">
+					<input type="checkbox" class="custom-control-input" id="gmode" name="gmode" >
+					<label class="custom-control-label" for="gmode" ><strong>Google mode <a href="#" data-toggle="modal" data-target="#googlemodemodal">?</a></strong></label>
+					<script type="text/javascript">
+					$("input[id=gmode]").change(function(){
+						if($(this).is(":checked")==false)
+						{
+							document.cookie = "gmode=; expires=Thu 01-Jan-70 00:00:01 GMT;";
+						}
+					});
+					</script>
+					
+				</div>
+ 			</div>
+
+			<div >
+
+
+				<strong>Seach in files:</strong>
+
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="all" name="filesuns" class="custom-control-input" value="all" checked>
+				<label class="custom-control-label" for="all">All</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="sort" name="filesuns" class="custom-control-input" value="sort" >
+				<label class="custom-control-label" for="sort">Only sorted</label>
+				</div>
+				<div class="custom-control custom-radio custom-control-inline">
+				<input type="radio" id="unsort" name="filesuns" class="custom-control-input" value="unsort" >
+				<label class="custom-control-label" for="unsort">Only uns.</label>
+				</div>
+
+
+
+ 			</div>
+
+ 		</div>
+	</div>
+</div>
+</form><ul class="nav nav-tabs "><li class="nav-item">
+ <a class="nav-link active " href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f">Files <span class="badge badge-primary">97</span></a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=e">Editions</a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=s">Series</a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=a">Authors</a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=p">Publishers</a>
+</li><li class="nav-item">
+ <a class="nav-link  " href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=w">Works</a>
+</li><li class="navbar-right" style="float: right !important;"><a class="nav-link" href="/json.php?object=f&ids=286115,287197,805629,1118730,286110,286111,286112,286113,2071803,2093902,2121475,2133417,968984,968985,968986,107397890,287182,729270,737665,107356856,287189,715156,729269,729271,729272,729273,737660,737661,737662,737663,737664,2066086,91090824,91090825,91090826,91090828,91090830,91090832,115694771,115694772,115694773,115694786,115857309,286114,288375,320353,805631,805633,1068465,1118729,2082359,2104669,2118393,2131301,91090827,91090829,91090831,91090833,91090834,102909473,110861454,112163713,112163714,112163715,115694778,115694779,115694780,115694781,115694782,115774772,573990,582050,621276,804025,805623,805625,805628,805632,880725,966280,1061341,1068463,1068464,1068466,1068467,1068468,1068469,2102177,91047571,91047572,91047754,91050429,91050430,97584517,98339561,99264158,107251076"><font color="black">JSON</font></a></li> </ul><div style="text-align: center;" class="paginator" id="paginator_example_top"></div><script type="text/javascript">paginator_example_top = new Paginator("paginator_example_top", 4, 25, 1, "/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=&ordermode=desc&filesuns=all&page=" );</script><table class="table  table-striped" id="tablelibgen"><thead><tr>
+
+<th scope="col" class="first_col"><nobr>
+ID <a href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=f_id&ordermode=asc">&#8597</a> 
+Time add. <a href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=time_added&ordermode=asc">&#8597</a> 
+Title <a href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=title&ordermode=asc">&#8597</a> 
+Series <a href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=series&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Author(s) <a href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=author&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Publisher <a href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=publisher&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Year <a href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=year&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col">Language</th>
+<th scope="col">Pages</th>
+<th scope="col"><nobr>Size  <a href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=filesize&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col"><nobr>Ext. <a href="/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=extension&ordermode=asc">&#8597</a></nobr></th>
+<th scope="col">Mirrors</th>
+</tr></thead><tbody><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-08-21; ID: 286115<br>Concombre MasquE - T01 - Les Aventures Du Concombre Masque" href="edition.php?id=308507"><i> #1 1971-oct</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-08-21; ID: 286115<br>Concombre MasquE - T01 - Les Aventures Du Concombre Masque" href="edition.php?id=308507">les aventures potagères du Concombre masqué <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199289</span></nobr>
+<font size=1 color="gray"><br>Concombre MasquE - T01 - Les Aventures Du Concombre Masque <br><b>2048x1722px 72dpi</b></font>
+</td>
+<td>Mandryka, Nikita (sc.);Mandryka, Nikita (des.);{N&B} (col.);</td>
+<td><a href="publisher.php?id=34030">Futuropolis</a></td>
+<td><nobr>1971 Octobre</nobr></td>
+<td>French</td>
+<td>36</td>
+<td><nobr><a href="/file.php?id=286115">12 MB</a></nobr></td>
+<td>cbz</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=4ace7222ccc3da094ddde63517751885"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/4ace7222ccc3da094ddde63517751885?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2023-08-22; ID: 287197<br>[BDFR] Le Concombre masqueÌ - 02 Le Retour du concombre masqueÌ (Mandryka)" href="edition.php?id=142129496"><i> #2 1973-apr</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2023-08-22; ID: 287197<br>[BDFR] Le Concombre masqueÌ - 02 Le Retour du concombre masqueÌ (Mandryka)" href="edition.php?id=142129496">Les aventures potagères du Concombre masqué <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199292</span></nobr>
+<font size=1 color="gray"><br>[BDFR] Le Concombre masqueÌ - 02 Le Retour du concombre masqueÌ (Mandryka) <br><b> </b></font>
+</td>
+<td> {Quadrichromie}(Colourist); Mandryka, Nikita(Designer); Loup Mandryka, Nikita(Cover artist); Mandryka, Nikita(Screenplay)</td>
+<td><a href="publisher.php?id=7240">Dargaud éditeur</a></td>
+<td><nobr>1973 Avril</nobr></td>
+<td>French</td>
+<td>51 / 46</td>
+<td><nobr><a href="/file.php?id=287197">28 MB</a></nobr></td>
+<td>cbz</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=c0992585c7fe36f5b4a80c202777f932"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/c0992585c7fe36f5b4a80c202777f932?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=381685">Concombre masqué (Le)   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2018-02-22/2022-08-21; ID: 805629<br>Concombre masqué (Le) - T01 - Les aventures potagères du concombre masqué" href="edition.php?id=142554458"><i> #1</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2018-02-22/2022-08-21; ID: 805629<br>Concombre masqué (Le) - T01 - Les aventures potagères du concombre masqué" href="edition.php?id=142554458">Les aventures potagères du concombre masqué <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199303</span></nobr>
+<font size=1 color="gray"><br>Concombre masqué (Le) - T01 - Les aventures potagères du concombre masqué <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>55</td>
+<td><nobr><a href="/file.php?id=805629">24 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=236b26921f9b4d7b9cf4b4703ca34761"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/236b26921f9b4d7b9cf4b4703ca34761?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=381685">Concombre masqué (Le)   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2019-04-11/2022-08-21; ID: 1118730<br>Concombre masqué (Le) - T04 - La vie quotidienne du concombre masqué" href="edition.php?id=142554459"><i> #4</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2019-04-11/2022-08-21; ID: 1118730<br>Concombre masqué (Le) - T04 - La vie quotidienne du concombre masqué" href="edition.php?id=142554459">La vie quotidienne du concombre masqué <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199304</span></nobr>
+<font size=1 color="gray"><br>Concombre masqué (Le) - T04 - La vie quotidienne du concombre masqué <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>48</td>
+<td><nobr><a href="/file.php?id=1118730">24 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=0a5b6a59745dad6dc546265d87f81d2f"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/0a5b6a59745dad6dc546265d87f81d2f?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286110<br>Concombre masquE (Le) - T01 - Les annEes Vaillant" href="edition.php?id=308507"><i> #1 1971-oct</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286110<br>Concombre masquE (Le) - T01 - Les annEes Vaillant" href="edition.php?id=308507">les aventures potagères du Concombre masqué <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199288</span></nobr>
+<font size=1 color="gray"><br>Concombre masquE (Le) - T01 - Les annEes Vaillant <br><b> </b></font>
+</td>
+<td>Mandryka, Nikita (sc.);Mandryka, Nikita (des.);{N&B} (col.);</td>
+<td><a href="publisher.php?id=34030">Futuropolis</a></td>
+<td><nobr>1971 Octobre</nobr></td>
+<td>French</td>
+<td>0</td>
+<td><nobr><a href="/file.php?id=286110">10 MB</a></nobr></td>
+<td>cbz</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=1c83722d3753a66117070c18ff98695f"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/1c83722d3753a66117070c18ff98695f?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286111<br>Concombre masquE (Le) - T02 - Les annEes Pilote" href="edition.php?id=142129496"><i> #2 1973-apr</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286111<br>Concombre masquE (Le) - T02 - Les annEes Pilote" href="edition.php?id=142129496">Les aventures potagères du Concombre masqué <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199294</span></nobr>
+<font size=1 color="gray"><br>Concombre masquE (Le) - T02 - Les annEes Pilote <br><b> </b></font>
+</td>
+<td> {Quadrichromie}(Colourist); Mandryka, Nikita(Designer); Loup Mandryka, Nikita(Cover artist); Mandryka, Nikita(Screenplay)</td>
+<td><a href="publisher.php?id=7240">Dargaud éditeur</a></td>
+<td><nobr>1973 Avril</nobr></td>
+<td>French</td>
+<td>0 / 46</td>
+<td><nobr><a href="/file.php?id=286111">5 MB</a></nobr></td>
+<td>cbz</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=590cf3baa68b26147cd304816641b87f"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/590cf3baa68b26147cd304816641b87f?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286112<br>Concombre masquE (Le) - T03 - Les annEes Echo" href="edition.php?id=142129497"><i> #3 1975-oct</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286112<br>Concombre masquE (Le) - T03 - Les annEes Echo" href="edition.php?id=142129497">Le retour du Concombre masqué <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286112<br>Concombre masquE (Le) - T03 - Les annEes Echo" href="edition.php?id=142129497"><i><font color="green"> 2205009087; 9782205009088</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199296</span></nobr>
+<font size=1 color="gray"><br>Concombre masquE (Le) - T03 - Les annEes Echo <br><b> </b></font>
+</td>
+<td> {Quadrichromie}(Colourist); Mandryka, Nikita(Designer); Mandryka, Nikita(Screenplay)</td>
+<td><a href="publisher.php?id=7240">Dargaud éditeur</a></td>
+<td><nobr>1975 Octobre</nobr></td>
+<td>French</td>
+<td>0 / 44</td>
+<td><nobr><a href="/file.php?id=286112">2 MB</a></nobr></td>
+<td>cbz</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=4fffdb4132d77626bebed7946ef1afb3"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/4fffdb4132d77626bebed7946ef1afb3?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286113<br>Concombre masquE (Le) - T05 - Les annEes Internet" href="edition.php?id=142129500"><i> #5 1981-jan</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286113<br>Concombre masquE (Le) - T05 - Les annEes Internet" href="edition.php?id=142129500">La vie quotidienne du Concombre masqué <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-10-29; ID: 286113<br>Concombre masquE (Le) - T05 - Les annEes Internet" href="edition.php?id=142129500"><i><font color="green"> 2205018469; 9782205018462</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199300</span></nobr>
+<font size=1 color="gray"><br>Concombre masquE (Le) - T05 - Les annEes Internet <br><b> </b></font>
+</td>
+<td> {Quadrichromie}(Colourist); Mandryka, Nikita(Designer); Mandryka, Nikita(Screenplay)</td>
+<td><a href="publisher.php?id=7240">Dargaud éditeur</a></td>
+<td><nobr>1981 Janvier</nobr></td>
+<td>French</td>
+<td>0 / 44</td>
+<td><nobr><a href="/file.php?id=286113">10 MB</a></nobr></td>
+<td>cbz</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=9ab3344fa527872c9112fe763c9721da"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/9ab3344fa527872c9112fe763c9721da?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2017-08-13/2021-06-18; ID: 2071803<br>Le Concombre Masqué - Les Années Vaillant (www.lecomcombre.com)" href="edition.php?id=308507"><i> #1 1971-oct</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2017-08-13/2021-06-18; ID: 2071803<br>Le Concombre Masqué - Les Années Vaillant (www.lecomcombre.com)" href="edition.php?id=308507">les aventures potagères du Concombre masqué <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 858155</span></nobr>
+<font size=1 color="gray"><br>Le Concombre Masqué - Les Années Vaillant (www.lecomcombre.com) <br><b> </b></font>
+</td>
+<td>Mandryka, Nikita (sc.);Mandryka, Nikita (des.);{N&B} (col.);</td>
+<td><a href="publisher.php?id=34030">Futuropolis</a></td>
+<td><nobr>1971 Octobre</nobr></td>
+<td>French</td>
+<td>95</td>
+<td><nobr><a href="/file.php?id=2071803">12 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=e493eaad4816bda5057b1f0f89b86856"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/e493eaad4816bda5057b1f0f89b86856?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-08-01/2021-06-18; ID: 2093902<br>Aventures Du Concombre Masque (Les) - Bdstudio" href="edition.php?id=308508"><i> #2<br>PochPub 1990-sep</i></a><br>J'ai lu BD</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-08-01/2021-06-18; ID: 2093902<br>Aventures Du Concombre Masque (Les) - Bdstudio" href="edition.php?id=308508">Les aventures potagères du Concombre masqué <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-08-01/2021-06-18; ID: 2093902<br>Aventures Du Concombre Masque (Les) - Bdstudio" href="edition.php?id=308508"><i><font color="green"> 2277331104</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 880254</span></nobr>
+<font size=1 color="gray"><br>Aventures Du Concombre Masque (Les) - Bdstudio <br><b>2560x1720px 300dpi</b></font>
+</td>
+<td>Mandryka, Nikita (sc.);Mandryka, Nikita (des.); {Quadrichromie} (col.);</td>
+<td><a href="publisher.php?id=14193">J'ai Lu</a></td>
+<td><nobr>1990 Septembre</nobr></td>
+<td>French</td>
+<td>37</td>
+<td><nobr><a href="/file.php?id=2093902">12 MB</a></nobr></td>
+<td>cbz</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=63982433ca39759e6724388159e22cb1"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/63982433ca39759e6724388159e22cb1?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-08-01/2021-06-18; ID: 2121475<br>Les aventures du concombre masque - Bdstudio" href="edition.php?id=308508"><i> #2<br>PochPub 1990-sep</i></a><br>J'ai lu BD</b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-08-01/2021-06-18; ID: 2121475<br>Les aventures du concombre masque - Bdstudio" href="edition.php?id=308508">Les aventures potagères du Concombre masqué <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-08-01/2021-06-18; ID: 2121475<br>Les aventures du concombre masque - Bdstudio" href="edition.php?id=308508"><i><font color="green"> 2277331104</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 907827</span></nobr>
+<font size=1 color="gray"><br>Les aventures du concombre masque - Bdstudio <br><b>1024x1776px 78dpi</b></font>
+</td>
+<td>Mandryka, Nikita (sc.);Mandryka, Nikita (des.); {Quadrichromie} (col.);</td>
+<td><a href="publisher.php?id=14193">J'ai Lu</a></td>
+<td><nobr>1990 Septembre</nobr></td>
+<td>French</td>
+<td>36</td>
+<td><nobr><a href="/file.php?id=2121475">12 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=0df2be43b9997ea4ba0045dec0c2842e"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/0df2be43b9997ea4ba0045dec0c2842e?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=157183">Le Concombre masqué hs  </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2017-08-13/2021-06-18; ID: 2133417<br>Tronches De Concombre" href="edition.php?id=306145"><i> #HS03 1995-jan</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2017-08-13/2021-06-18; ID: 2133417<br>Tronches De Concombre" href="edition.php?id=306145">Tronches de Concombre <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 919769</span></nobr>
+<font size=1 color="gray"><br>Tronches De Concombre <br><b>175x122px 300dpi</b></font>
+</td>
+<td>{Collectif} (sc.);{Collectif} (des.);{Collectif} (col.);</td>
+<td><a href="publisher.php?id=8541">Dupuis</a></td>
+<td><nobr>1995 Janvier</nobr></td>
+<td>French</td>
+<td>48</td>
+<td><nobr><a href="/file.php?id=2133417">3 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=31850368c6ff4bc489f200205ab45e06"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/31850368c6ff4bc489f200205ab45e06?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=384982">Mandryka   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2018-11-08/2022-08-21; ID: 968984<br>Mandryka - T01 - Les aventures potagиres du concombre masquй" href="edition.php?id=142567034"><i> #1</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2018-11-08/2022-08-21; ID: 968984<br>Mandryka - T01 - Les aventures potagиres du concombre masquй" href="edition.php?id=142567034">Les aventures potagиres du concombre masquй <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1222827</span></nobr>
+<font size=1 color="gray"><br>Mandryka - T01 - Les aventures potagиres du concombre masquй <br><b>1280x1654px 240dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>54</td>
+<td><nobr><a href="/file.php?id=968984">24 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=eaf7207c378610a0f37d4c180cd72681"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/eaf7207c378610a0f37d4c180cd72681?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=384982">Mandryka   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2018-11-08/2022-08-21; ID: 968985<br>Mandryka - T02 - Le retour du concombre masquй" href="edition.php?id=142567036"><i> #2</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2018-11-08/2022-08-21; ID: 968985<br>Mandryka - T02 - Le retour du concombre masquй" href="edition.php?id=142567036">Le retour du concombre masquй <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1222829</span></nobr>
+<font size=1 color="gray"><br>Mandryka - T02 - Le retour du concombre masquй <br><b>1600x2193px 300dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>50</td>
+<td><nobr><a href="/file.php?id=968985">28 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=c4bad74403d575794ab71adedf353d53"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/c4bad74403d575794ab71adedf353d53?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=384982">Mandryka   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2018-11-08/2022-08-21; ID: 968986<br>Mandryka - T04 - La vie quotidienne du concombre masquй" href="edition.php?id=142567037"><i> #4</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2018-11-08/2022-08-21; ID: 968986<br>Mandryka - T04 - La vie quotidienne du concombre masquй" href="edition.php?id=142567037">La vie quotidienne du concombre masquй <i></i></a> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1222830</span></nobr>
+<font size=1 color="gray"><br>Mandryka - T04 - La vie quotidienne du concombre masquй <br><b>1280x1641px 150dpi</b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>47</td>
+<td><nobr><a href="/file.php?id=968986">24 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=184448cbe0cc46b18ed13ebdbb9e5cf1"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/184448cbe0cc46b18ed13ebdbb9e5cf1?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+<td colspan=5>
+  <div class="row">
+      
+    <div class="col">
+<span data-toggle="tooltip" data-placement="right" data-html="true" title="Time added/Time modified : 2024-12-13 04:52:12/2024-12-13 04:52:12<br>File ID: 107397890" >Le Concombre Masqué #001 Les Aventures Potagères Du Concombre Masqué (1st print) (futuropolis edition)<br><font size=1 color="gray">0day\French\o (1984) Alain Beaulet Editeur\01 Les Petits Carnets\(2010-10) Le Concombre Masqué\01 Le Concombre Masqué\Le Concombre Masqué</font></span>
+
+
+    </div>
+</div>
+</td>
+<td>33</td>
+<td><nobr><a href="/file.php?id=107397890">3 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=60ca569aa2ba3d1b253d021de1ba51b3"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/60ca569aa2ba3d1b253d021de1ba51b3?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=381687">Concombre Masque: Tronches De Concombre (Le)   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-08-21; ID: 287182<br>Le Concombre MasquE - Tronches De Concombre" href="edition.php?id=142554461"><i></i></a></b> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199307</span></nobr>
+<font size=1 color="gray"><br>Le Concombre MasquE - Tronches De Concombre <br><b> </b></font>
+</td>
+<td></td>
+<td></td>
+<td><nobr></nobr></td>
+<td>French</td>
+<td>37</td>
+<td><nobr><a href="/file.php?id=287182">3 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=96b11fb1b6106ac97720e6c03a71745b"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/96b11fb1b6106ac97720e6c03a71745b?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+<td colspan=5>
+  <div class="row">
+      
+    <div class="col">
+<span data-toggle="tooltip" data-placement="right" data-html="true" title="Time added/Time modified : 2017-08-13 01:11:48/2023-07-01 09:38:03<br>File ID: 729270" >Le Concombre Masqué - La Vie Quotidienne, Intense Et Passionée Du Concombre Masqué<br><font size=1 color="gray">_0DAY2\---French Comics\-(1985) Média Participations\02 Groupe Dargaud\-(1943) Dargaud\02 Dargaud\20 Le Concombre Masqué\04 Le Concombre Masqué- Reprints</font></span>
+
+<br><font size=1 color="gray"><b>940x1250px 96dpi<b></font>
+    </div>
+</div>
+</td>
+<td>9</td>
+<td><nobr><a href="/file.php?id=729270">5 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=38cb983a02151fadb5665d72abb1c63e"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/38cb983a02151fadb5665d72abb1c63e?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+<td colspan=5>
+  <div class="row">
+      
+    <div class="col">
+<span data-toggle="tooltip" data-placement="right" data-html="true" title="Time added/Time modified : 2017-08-13 16:26:39/2023-07-01 09:38:07<br>File ID: 737665" >Le Concombre Masqué - Les Archives Du Concombre Masqué<br><font size=1 color="gray">_0DAY3\---French Comics\-(1985) Média Participations\02 Groupe Dargaud\-(1943) Dargaud\02 Dargaud\20 Le Concombre Masqué\04 Le Concombre Masqué- Reprints</font></span>
+
+
+    </div>
+</div>
+</td>
+<td>6</td>
+<td><nobr><a href="/file.php?id=737665">841 kB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=3ef56c49357721947a8928cb68e9414c"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/3ef56c49357721947a8928cb68e9414c?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+<td colspan=5>
+  <div class="row">
+      
+    <div class="col">
+<span data-toggle="tooltip" data-placement="right" data-html="true" title="Time added/Time modified : 2024-11-28 19:22:56/2024-11-28 19:22:56<br>File ID: 107356856" >Le Concombre Masqué Et L'Usine A Gaz<br><font size=1 color="gray">0day\French\o (1984) Alain Beaulet Editeur\01 Les Petits Carnets\(2010-10) Le Concombre Masqué\02 Le Concombre Masqué- LS & One-Shots\Le Concombre Masqué Et L'Usine A Gaz</font></span>
+
+
+    </div>
+</div>
+</td>
+<td>62</td>
+<td><nobr><a href="/file.php?id=107356856">11 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=387b5aeeef9d4d07e1e0de5190546434"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/387b5aeeef9d4d07e1e0de5190546434?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+
+<td><b><a href="series.php?id=158314">Le Concombre masqué   </a><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-08-21; ID: 287189<br>BD.FR.-.Le.Concombre.Masqué.-.07.(Dargaud).-.Le.concombre.contre.le.grand.Patatoseur.-.(Mandryka).-.[1280]" href="edition.php?id=142129501"><i> #6 1982-may</i></a></b><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-08-21; ID: 287189<br>BD.FR.-.Le.Concombre.Masqué.-.07.(Dargaud).-.Le.concombre.contre.le.grand.Patatoseur.-.(Mandryka).-.[1280]" href="edition.php?id=142129501">A la poursuite du Broutchlag mordoré <i></i></a><br><a data-toggle="tooltip" data-placement="right" data-html="true" title="Add/Edit : 2015-07-30/2022-08-21; ID: 287189<br>BD.FR.-.Le.Concombre.Masqué.-.07.(Dargaud).-.Le.concombre.contre.le.grand.Patatoseur.-.(Mandryka).-.[1280]" href="edition.php?id=142129501"><i><font color="green"> 2205022474; 9782205022476</font></a></i> 
+<nobr><span class="badge badge-primary"><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="Comics issue">c</a></span> 
+<span class="badge badge-secondary"">c 1199301</span></nobr>
+<font size=1 color="gray"><br>BD.FR.-.Le.Concombre.Masqué.-.07.(Dargaud).-.Le.concombre.contre.le.grand.Patatoseur.-.(Mandryka).-.[1280] <br><b>1280x1754px 150dpi</b></font>
+</td>
+<td> {Quadrichromie}(Colourist); Mandryka, Nikita(Designer); Mandryka, Nikita(Screenplay)</td>
+<td><a href="publisher.php?id=7240">Dargaud éditeur</a></td>
+<td><nobr>1982 Mai</nobr></td>
+<td>French</td>
+<td>50 / 46</td>
+<td><nobr><a href="/file.php?id=287189">24 MB</a></nobr></td>
+<td>cbz</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=26d031c27eb9cde8d6304e5507ef2004"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/26d031c27eb9cde8d6304e5507ef2004?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+<td colspan=5>
+  <div class="row">
+      
+    <div class="col">
+<span data-toggle="tooltip" data-placement="right" data-html="true" title="Time added/Time modified : 2017-03-09 15:04:35/2023-07-01 09:37:55<br>File ID: 715156" >Le Concombre Masqué - Les Années Vaillant (Le Kafard)<br><font size=1 color="gray">_0DAY2\---French Comics\-(1985) Média Participations\02 Groupe Dargaud\-(1943) Dargaud\02 Dargaud\20 Le Concombre Masqué\04 Le Concombre Masqué- Reprints</font></span>
+
+
+    </div>
+</div>
+</td>
+<td>52</td>
+<td><nobr><a href="/file.php?id=715156">10 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=edab384974c75c60ceab30ba89336a4f"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/edab384974c75c60ceab30ba89336a4f?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+<td colspan=5>
+  <div class="row">
+      
+    <div class="col">
+<span data-toggle="tooltip" data-placement="right" data-html="true" title="Time added/Time modified : 2017-08-13 01:11:48/2023-07-01 09:38:03<br>File ID: 729269" >Le Concombre Masqué - L'Echo Du Web<br><font size=1 color="gray">_0DAY2\---French Comics\-(1985) Média Participations\02 Groupe Dargaud\-(1943) Dargaud\02 Dargaud\20 Le Concombre Masqué\04 Le Concombre Masqué- Reprints</font></span>
+
+<br><font size=1 color="gray"><b>309x344px 72dpi<b></font>
+    </div>
+</div>
+</td>
+<td>1166</td>
+<td><nobr><a href="/file.php?id=729269">61 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=f30a667525ecd7fcc009dc63b340fcec"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/f30a667525ecd7fcc009dc63b340fcec?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+<td colspan=5>
+  <div class="row">
+      
+    <div class="col">
+<span data-toggle="tooltip" data-placement="right" data-html="true" title="Time added/Time modified : 2017-08-13 01:11:48/2023-07-01 09:38:03<br>File ID: 729271" >Le Concombre Masqué - Les Années Pilote (www.leconcombre.com)<br><font size=1 color="gray">_0DAY2\---French Comics\-(1985) Média Participations\02 Groupe Dargaud\-(1943) Dargaud\02 Dargaud\20 Le Concombre Masqué\04 Le Concombre Masqué- Reprints</font></span>
+
+
+    </div>
+</div>
+</td>
+<td>587</td>
+<td><nobr><a href="/file.php?id=729271">39 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=2a957593e3693bfba11d3c929192acbe"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/2a957593e3693bfba11d3c929192acbe?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr><tr>
+<td colspan=5>
+  <div class="row">
+      
+    <div class="col">
+<span data-toggle="tooltip" data-placement="right" data-html="true" title="Time added/Time modified : 2017-08-13 01:11:48/2023-07-01 09:38:03<br>File ID: 729272" >Le Concombre Masqué - Les Années Spirou  (Le Kafard)<br><font size=1 color="gray">_0DAY2\---French Comics\-(1985) Média Participations\02 Groupe Dargaud\-(1943) Dargaud\02 Dargaud\20 Le Concombre Masqué\04 Le Concombre Masqué- Reprints</font></span>
+
+
+    </div>
+</div>
+</td>
+<td>32</td>
+<td><nobr><a href="/file.php?id=729272">6 MB</a></nobr></td>
+<td>cbr</td>
+<td><a data-toggle="tooltip" data-placement="bottom" data-html="true" title="libgen" href="/get.php?md5=3c014814611e9e60eacf759fe7c51616"><span class="badge badge-primary">Libgen</span></a> <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="anna's archive" href="https://en.annas-archive.gl/md5/3c014814611e9e60eacf759fe7c51616?r=Ax2w6jC"><span class="badge badge-primary">Anna's arch</span></a> </td>
+</tr></tbody></table><table>
+  <tr>
+    <td><script>
+	atOptions = {
+		'key' : '80ff16b446cdd16fda9f69edcec465d4',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script src="https://bauval.org/22/80ff16b446cdd16fda9f69edcec465d4"></script>
+
+</td>
+    <td><script>
+	atOptions = {
+		'key' : '80ff16b446cdd16fda9f69edcec465d4',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script src="https://bauval.org/22/80ff16b446cdd16fda9f69edcec465d4"></script>
+
+</td>
+  </tr> 
+</table><div style="text-align: center;" class="paginator" id="paginator_example_bottom"></div><script type="text/javascript">paginator_example_bottom = new Paginator("paginator_example_bottom", 4, 25, 1, "/index.php?req=Concombre&objects[]=f&topics[]=c&columns[]=t&columns[]=a&res=50&curtab=f&order=&ordermode=desc&filesuns=all&page=" );</script><div class="modal fade text-dark" id="googlemodemodal" tabindex="-1" aria-labelledby="googlemodemodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="googlemodemodalLabel">Google mode</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+By default, the search searches for a set of marked fields containing all the words specified in the query in no particular order<br>
+Advanced search mode (Google mode), allows you to set more precise search terms:<br>
+- Quotes: "" - search exactly for the phrase as it is written in the database<br>
+- Mask: * (min 3 chars)- search by part of a word<br>
+- Excluding words: - (minus) - does not display records containing this word, also, these conditions can be combined.<br>
+Example:<br>
+"Physics and Chemistry" Basi * -technology<br>
+means the title of the book contains the exact phrase "Physics and Chemistry", contains the word starting with Basi and does not contain the word technology.<br>
+You can also search for a specific field or view mode that is not displayed for selection in the interface, syntax: field_name:value<br>
+List of add. fields:<br>
+For the Files tab:<br>
+<i>md5</i><br>
+<i>tth</i><br>
+<i>sha1</i><br>
+<i>sha256</i><br>
+<i>crc32</i><br>
+<i>edonkey</i><br>
+<i>doi</i><br>
+
+View modes:<br>
+<i>mode:last</i> - last added entries (for a given object - series, authors, editions, etc.)<br>
+<br>
+<i>fmode:last</i> - last added files (for the given repository)<br>
+<br>
+Add. fields for object "editions" and "files":<br>
+<i>issuevolume</i> - periodical volume<br>
+<i>issuesid</i> - serial ID of the periodical<br>
+<i>issuenumber</i> - the number (within the volume) of the periodical<br>
+<i>issuetnumber</i> is the gross number of the periodical<br>
+<i>issueynumber</i> - intra-annual issue of the periodical<br>
+<i>year</i> - year<br>
+<i>publisherid</i> - Publisher ID<br>
+<i>authorid</i> - Author's ID<br>
+<i>lang</i> - three-letter language code (ISO 639)<br>
+<i>fsize</i> - filesize (MBytes), for example: fsize&gt;10, fsize&lt;20, fsize=15<br>
+<i>ext</i> - File extenstion <br>
+<i>booktopicid</i> - ID of the classifier for books<br>
+<i>tags</i> - Теги (издание, работы, серия)<br>
+<br>
+Add. fields for object "series"<br>
+<i>comtopicid</i> - ID of the classifier for comics<br>
+<i>smtopicid</i> - ID of the classifier for scientific journals<br>
+<i>magtopicid</i> - ID of the classifier for magazines<br>
+<i>issn</i> - ISSN
+
+      </div>
+    </div>
+  </div>
+</div><nav class="navbar sticky-bottom navbar-expand-sm navbar-dark bg-secondary">
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+	    <a class="nav-link" href="#" data-toggle="modal" data-target="#dmcamodal">DMCA</a>
+      </li>
+      <li class="nav-item">
+	    <a class="nav-link" href="#" data-toggle="modal" data-target="#aboutmodal">ABOUT</a>
+      </li>
+      <li class="nav-item">
+	    <a class="nav-link" href="#" data-toggle="modal" data-target="#donatemodal" >DONATE</a>
+      </li>
+	
+    </ul>
+	<span class="navbar-text">Users online 8154</span>
+  </div>
+</nav>
+
+<!-- Modal Donate -->
+<div class="modal fade text-dark" id="donatemodal" tabindex="-1" aria-labelledby="donatemodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="donatemodalLabel">Donate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <a href="bitcoin://bc1qlv9lwa5vncm2jjrxyhddfcvu0z3u5vn0s9672r">Bitcoin</a>
+	<br>
+        <a href="monero:48WhyKv4D9x53SyDFNYuMsHsDzuHXEcht4mWoFtXtE3k4KZ3A7goi3CQWBQQZ3A8PSK7CpwnAFKLnfGiZTAbEpcaCQCghvN">Monero</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal About -->
+<div class="modal fade text-dark" id="aboutmodal" tabindex="-1" aria-labelledby="aboutmodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="aboutmodalLabel">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+<div id="about">
+The Library Genesis aggregator is a community aiming at collecting and cataloging items descriptions for the most part of scientific, 
+scientific and technical directions, as well as file metadata. In addition to the descriptions, 
+the aggregator contains only links to third-party resources hosted by users. 
+All information posted on the website is collected from publicly available public Internet resources and is intended solely for informational purposes.  
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal DMCA -->
+<div class="modal fade text-dark" id="dmcamodal" tabindex="-1" aria-labelledby="dmcamodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dmcamodalLabel">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+<div id="dmca">
+Library Genesis - aggregator items is a website that collects and organizes online items from users. 
+Item aggregation is done for fact-finding purposes, and website Library Genesis respects the rights of copyright holders and respect dcma.
+
+     Removing Content From Library Genesis / DMCA Policy
+     Library Genesis respects the intellectual property of others.
+</div>
+
+    <div class="dmca">
+     If you believe that your copyrighted work has been copied in a way that constitutes copyright infringement and is accessible on this site, you may notify our copyright agent, as set forth in the Digital Millennium Copyright Act of 1998 (DMCA). For your complaint to be valid under the DMCA, you must provide the following information when providing notice of the claimed copyright infringement:
+</div>
+    <div class="dmca">
+     * A physical or electronic signature of a person authorized to act on behalf of the copyright owner Identification of the copyrighted work claimed to have been infringed <br />
+     * Identification of the material that is claimed to be infringing or to be the subject of the infringing activity and that is to be removed <br />
+     * Information reasonably sufficient to permit the service provider to contact the complaining party, such as an address, telephone number, and, if available, an electronic mail address <br />
+     * A statement that the complaining party "in good faith believes that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or law" <br />
+     * A statement that the "information in the notification is accurate", and "under penalty of perjury, the complaining party is authorized to act on behalf of the owner of an exclusive right that is allegedly infringed" <br />
+     The above information must be submitted as a written, faxed or emailed notification to the following Designated Agent: contact@example.invalid. Appeals will be reviewed within 72 hours.</div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.5/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	<script src="/js/form-validation.js"></script>
+	<script>
+$('[data-toggle="tooltip"]').tooltip();
+$('.btn-tooltip-bottom').tooltip({
+    placement: 'bottom'
+});
+</script>
+
+</body>
+</html>

@@ -602,5 +602,62 @@ const comicQuery = query({ title: 'Asterix', author: null, mediaKind: 'comic', l
   check('availability: the search does not wait past its window', took < 11_000, `${took} ms`);
 }
 
+/* --- comics: credits, compared title and search text --------------------------------------------- */
+{
+  // A member key skips the availability checks, which are not what these scenarios are about.
+  const keyed = config({ credential: 'member-key' });
+  const libgenOnly = (page) => makeHost([
+    [ANNAS, () => html(fixture('ddos-guard-captcha.html'), 403, { server: 'ddos-guard' })],
+    [LIBGEN, page],
+  ]);
+
+  const plugin = await loadPlugin();
+  const host = libgenOnly(() => html(fixture('libgen-comics-concombre.html')));
+  const releases = await plugin.search(query({ title: 'Les aventures potagères du Concombre masqué', author: 'Nikita Mandryka', mediaKind: 'comic', limit: 50 }), keyed, host, undefined);
+  check('comic credits: roles and placeholders removed', releases.every((r) => !/[({]/.test(r.author ?? '')), JSON.stringify([...new Set(releases.map((r) => r.author))]));
+  check('comic credits: first name first, once', releases.some((r) => r.author === 'Nikita Mandryka'), JSON.stringify([...new Set(releases.map((r) => r.author))]));
+  check('comic credits: a cover artist is not an author', !releases.some((r) => /Loup/.test(r.author ?? '')));
+  const aventures = releases.find((r) => /aventures potag/i.test(r.title) && r.title.startsWith('Le Concombre masqué'));
+  check('comic title: album alone when the request does not name the series', /^les aventures potagères du Concombre masqué$/i.test(aventures?.bookTitle ?? ''), aventures?.bookTitle);
+
+  const series = await (await loadPlugin()).search(
+    query({ title: 'Le Concombre Masqué - Tome 2 - Le monde fascinant des problèmes', author: 'Nikita Mandryka', mediaKind: 'comic', limit: 50 }),
+    keyed,
+    libgenOnly(() => html(fixture('libgen-comics-concombre.html'))),
+    undefined,
+  );
+  const monde = series.find((r) => /retour/i.test(r.title));
+  // When the compared title equals the shown one it is not sent twice: BookOrbit scores the title.
+  check('comic title: series kept when the request names it', /^Le Concombre masqué - /.test(monde?.bookTitle ?? monde?.title ?? ''), monde?.bookTitle ?? monde?.title);
+
+  // "Tome 1" is not in the catalogue's title: with it, the search matched nothing.
+  const asked = [];
+  const tome = libgenOnly((url) => {
+    const req = new URL(url).searchParams.get('req');
+    asked.push(req);
+    return html(fixture(/Concombre/i.test(req) ? 'libgen-no-hits.html' : 'libgen-comics-concombre.html'));
+  });
+  const found = await (await loadPlugin()).search(query({ title: 'Le Concombre Masqué - Tome 1 - Le bain de Minuit', author: null, mediaKind: 'comic', limit: 50 }), keyed, tome, undefined);
+  check('comic search: volume marker and separators dropped', asked[0] === 'Le Concombre Masqué Le bain de Minuit', asked[0]);
+  check('comic search: the album alone when that finds nothing', asked[1] === 'Le bain de Minuit' && found.length > 0, JSON.stringify(asked));
+
+  const once = [];
+  await (await loadPlugin()).search(
+    query({ title: 'Le Concombre masqué - Les aventures potagères du Concombre masqué', author: null, mediaKind: 'comic', limit: 50 }),
+    keyed,
+    libgenOnly((url) => (once.push(url), html(fixture('libgen-comics-concombre.html')))),
+    undefined,
+  );
+  check('comic search: no album pass when the first one found something', once.length === 1, `${once.length} searches`);
+
+  const annas = makeHost([[ANNAS, () => html(fixture('annas-comics-table.html'))]]);
+  await (await loadPlugin()).search(query({ title: 'Astérix - Tome 8 - La Zizanie', author: null, mediaKind: 'comic' }), keyed, annas, undefined);
+  check("comic search: Anna's Archive gets the cleaned title", new URL(annas.requests[0].url).searchParams.get('termval_1') === 'Astérix La Zizanie', new URL(annas.requests[0].url).searchParams.get('termval_1'));
+
+  const ebook = libgenOnly((url) => html(fixture('libgen-dune.html')));
+  await (await loadPlugin()).search(query({ title: 'Dune - Tome 1' }), keyed, ebook, undefined);
+  check('ebook search: titles untouched', new URL(ebook.requests.find((r) => LIBGEN.test(r.url)).url).searchParams.get('req').startsWith('Dune - Tome 1'));
+}
+
 console.log(`${passed} passed, ${failures} failed`);
 process.exit(failures === 0 ? 0 : 1);

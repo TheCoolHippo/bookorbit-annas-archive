@@ -125,7 +125,7 @@ function looksLikeAnnasArchive(html) {
 
 export default {
   apiVersion: 1,
-  version: '1.2.2',
+  version: '1.2.3',
   update: {
     manifestUrl: 'https://raw.githubusercontent.com/TheCoolHippo/bookorbit-annas-archive/main/updates/annas-archive.json',
     ed25519PublicKey: 'OlmPIog8s2G128FNUXGEIWoAsok_yUqQvHFK9T_1L-M',
@@ -212,7 +212,7 @@ export default {
     if (!MEDIA_KINDS.includes(query.mediaKind)) {
       throw host.fail('unsupportedMedium', `Anna's Archive is searched for ebooks and comics only, not ${query.mediaKind}s`);
     }
-    const formats = wantedFormats(query.mediaKind, config);
+    const formats = { ...wantedFormats(query.mediaKind, config), requestTitle: query.title };
     const started = Date.now();
     const remaining = () => SEARCH_BUDGET_MS - (Date.now() - started);
 
@@ -402,7 +402,7 @@ function annasSearchUrl(mirror, query, formats, accepted = []) {
     let index = 1;
     if (query.title) {
       url.searchParams.set(`termtype_${index}`, 'title');
-      url.searchParams.set(`termval_${index}`, stripParentheticals(query.title));
+      url.searchParams.set(`termval_${index}`, formats.mediaKind === 'comic' ? comicSearchTitle(query.title) : stripParentheticals(query.title));
       index += 1;
     }
     if (query.author) {
@@ -516,13 +516,14 @@ function annasRelease(row, formats) {
   // Catalogue descriptors that some imported records carry in place of a title.
   if (title.includes('/') && title.length < 40 && !/\d/.test(title)) return null;
 
-  const author = cleanAuthor(firstSpanText(cells[AA.author]));
+  const comic = formats.mediaKind === 'comic';
+  const author = comic ? cleanComicAuthor(firstSpanText(cells[AA.author])) : cleanAuthor(firstSpanText(cells[AA.author]));
   const language = languageCode(firstSpanText(cells[AA.language]));
   const year = firstSpanText(cells[AA.year]);
 
   return {
     guid: md5,
-    ...readTitle(title),
+    ...(comic ? comicTitles(title, formats.requestTitle) : readTitle(title)),
     sizeBytes: parseSize(firstSpanText(cells[AA.size])),
     seeders: null,
     leechers: null,
@@ -798,7 +799,17 @@ const LIBGEN_TOPICS = { ebook: ['l', 'f'], comic: ['c'] };
 async function searchLibgen(query, config, formats, host, signal, remaining) {
   const passes = [];
   if (/^\d{13}$/.test(query.isbn13 ?? '')) passes.push({ req: query.isbn13, columns: ['i'] });
-  passes.push({ req: host.buildSearchText(query), columns: ['t', 'a'] });
+  if (formats.mediaKind === 'comic') {
+    // Library Genesis wants every word: "Tome 2" in a request is the reason nothing matches.
+    const title = comicSearchTitle(query.title);
+    passes.push({ req: host.buildSearchText({ ...query, title }), columns: ['t', 'a'] });
+    const album = comicAlbumTitle(query.title);
+    if (album && album.toLowerCase() !== title.toLowerCase()) {
+      passes.push({ req: host.buildSearchText({ ...query, title: album }), columns: ['t', 'a'], onlyIfEmpty: true });
+    }
+  } else {
+    passes.push({ req: host.buildSearchText(query), columns: ['t', 'a'] });
+  }
 
   const releases = [];
   const seen = new Set();
@@ -807,6 +818,7 @@ async function searchLibgen(query, config, formats, host, signal, remaining) {
 
   for (const pass of passes) {
     if (releases.length >= query.limit || signal?.aborted || remaining() <= 0) break;
+    if (pass.onlyIfEmpty && releases.length > 0) break;
     try {
       const html = await readLibgenPage(host, config, pass, formats.mediaKind);
       for (const release of libgenReleases(html, formats)) {
@@ -872,12 +884,12 @@ function libgenRelease(row, formats) {
   const md5 = LIBGEN_MD5_IN_HREF.exec(row)?.[1]?.toLowerCase();
   if (!md5) return null;
 
-  const comic = formats.mediaKind === 'comic' ? comicHeading(cells[LG.title]) : null;
+  const comic = formats.mediaKind === 'comic' ? comicHeading(cells[LG.title], formats.requestTitle) : null;
   const heading = comic ? '' : firstAnchorText(cells[LG.title], 'edition.php');
   const format = formatOf(cellText(cells[LG.format]), formats);
   if ((!comic && !heading) || !format) return null;
 
-  const author = cleanAuthor(cellText(cells[LG.author]));
+  const author = comic ? cleanComicAuthor(cellText(cells[LG.author])) : cleanAuthor(cellText(cells[LG.author]));
   const language = languageCode(cellText(cells[LG.language]));
   const isbn = rowIsbns(cells[LG.title]);
 
@@ -905,15 +917,98 @@ function libgenRelease(row, formats) {
  * Read like a book's, by its first edition link, every comic would be called "#15". The album
  * title is what a request names, so it is what gets scored; the series and number are shown.
  */
-function comicHeading(cell) {
+function comicHeading(cell, requestTitle) {
   const series = undouble(anchorTexts(cell, 'series.php')[0] ?? '');
   const editions = anchorTexts(cell, 'edition.php').filter(Boolean);
   const issue = editions.find((text) => /^#\s*\S+$/.test(text))?.replace(/^#\s*/, '') ?? '';
   const name = editions.find((text) => !text.startsWith('#')) ?? '';
   const title = [series && issue ? `${series} #${issue}` : series, name].filter(Boolean).join(' - ');
   if (!title) return null;
-  const bare = stripParentheticals(name || series);
+  const bare = comparedComicTitle(series, name, requestTitle);
   return { title, ...(bare && bare !== title ? { bookTitle: bare } : {}) };
+}
+
+/**
+ * A comic's title as BookOrbit should score it against the request.
+ *
+ * BookOrbit compares both ways, so the series name helps exactly when the request names it too:
+ * "Le Concombre masqué - Tome 2 - Le monde fascinant des problèmes" scores 73 against a release
+ * titled with the series and 61 against the album alone, while "La vie quotidienne du Concombre
+ * masqué" scores best against the album alone. Measured with BookOrbit's own scorer.
+ */
+function comparedComicTitle(series, album, requestTitle) {
+  const bareSeries = series ? stripParentheticals(series) : '';
+  if (!album) return bareSeries;
+  const bareAlbum = stripParentheticals(album);
+  if (bareSeries && requestTitle && foldText(requestTitle).includes(foldText(bareSeries))) return `${bareSeries} - ${bareAlbum}`;
+  return bareAlbum;
+}
+
+/** Anna's Archive writes a comic as one string, usually "Series - Album". */
+function comicTitles(title, requestTitle) {
+  const at = title.indexOf(' - ');
+  if (at === -1) return readTitle(title);
+  const bare = comparedComicTitle(title.slice(0, at).trim(), title.slice(at + 3).trim(), requestTitle);
+  return { title, ...(bare && bare !== title ? { bookTitle: bare } : {}) };
+}
+
+function foldText(value) {
+  return value
+    .normalize('NFD')
+    .replace(/\p{M}+/gu, '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
+}
+
+/** Volume markers a request carries and a catalogue title usually does not. */
+const VOLUME_MARKER = /(?:^|\s)(?:tome|t\.|vol\.?|volume|n°|no\.)\s*\d+\b|#\s*\d+\b/gi;
+
+/** The request title as Library Genesis can match it: no volume markers, no separators. */
+function comicSearchTitle(title) {
+  // Separators first: removing "Tome 1" from "A - Tome 1 - B" first would leave "A -  - B", whose
+  // second dash no longer has the space in front of it that marks it as a separator.
+  return stripParentheticals(title)
+    .replace(/\s+[-–—:]\s+/g, ' ')
+    .replace(VOLUME_MARKER, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** The album alone, for a request titled "Series - Tome 2 - Album": the last part that is not a volume. */
+function comicAlbumTitle(title) {
+  const parts = stripParentheticals(title)
+    .split(/\s+[-–—:]\s+/)
+    .map((part) => part.replace(VOLUME_MARKER, ' ').replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  return parts.length > 1 ? parts[parts.length - 1] : '';
+}
+
+/**
+ * Comic credits as Library Genesis prints them, with roles and placeholders:
+ *
+ *   Mandryka, Nikita (sc.); Mandryka, Nikita (des.); {Quadrichromie} (col.)
+ *   {Quadrichromie}(Colourist); Mandryka, Nikita(Designer); Mandryka, Nikita(Screenplay)
+ *
+ * BookOrbit compares the whole field with the requested author, so the roles and the colourist
+ * placeholder cost a release twelve points of its match (65 instead of 77, measured). Writers and
+ * artists are kept, each once and first name first; colourists, cover artists, letterers and
+ * anything in braces, which names no person, are not.
+ */
+const COMIC_CREDIT_SKIPPED = /^(?:col\.?|colou?rist|colou?rs?|cover(?: artist)?|couv\.?|lettr?\.?|letterer|lettrage|trad\.?|translator)$/i;
+
+function cleanComicAuthor(value) {
+  const names = [];
+  for (const credit of value.split(';')) {
+    let name = credit.trim();
+    const role = /\(([^)]*)\)\s*$/.exec(name)?.[1]?.trim() ?? '';
+    name = name.replace(/\s*\([^)]*\)\s*$/, '').trim();
+    if (!name || /^\{[^}]*\}$/.test(name) || COMIC_CREDIT_SKIPPED.test(role)) continue;
+    const parts = name.split(',').map((part) => part.trim());
+    if (parts.length === 2 && parts[0] && parts[1]) name = `${parts[1]} ${parts[0]}`;
+    if (!names.some((known) => known.toLowerCase() === name.toLowerCase())) names.push(name);
+  }
+  return names.join('; ');
 }
 
 /** Library Genesis prints some series names twice over: "Asterix Y Obelix Asterix Y Obelix". */
