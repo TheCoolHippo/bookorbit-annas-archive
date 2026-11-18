@@ -35,6 +35,12 @@ Both catalogues name a file by its md5, so the download path is the same whichev
 - otherwise, or when the fast downloads for the day are used up: the Library Genesis download
   service.
 
+Library Genesis keeps listing files its file server no longer has: the download link then ends in
+"File not found. The repositories may not be synchronized". So a Library Genesis link is checked
+before it is handed over, by asking for its first bytes only, and each mirror is tried in turn.
+When none has the file, the grab fails at once with "Library Genesis lists this file but its file
+server does not have it. Try another release." instead of a bare "That URL answered 500" later.
+
 An empty result from Anna's Archive ("No files found") counts as a real answer and returns
 nothing. A page whose layout the plugin cannot read does not: it falls back to Library Genesis,
 so a markup change never looks like "this book does not exist".

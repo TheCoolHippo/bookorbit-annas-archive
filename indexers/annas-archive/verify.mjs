@@ -451,6 +451,50 @@ const serviceRedirects = () => new Response(null, { status: 302, headers: { loca
   const error = await rejects(plugin.resolveFile(release, config(), host, undefined));
   check('resolve: no mirror offers it is unreachable, with reasons', error?.failure === 'unreachable' && /libgen\.bz/.test(error?.message ?? ''), error?.message);
 }
+/* --- the get.php link is checked before it is handed over -------------------------------------- */
+const fileServes = () => new Response('PK\u0003\u0004', { status: 206, headers: { 'content-type': 'application/octet-stream' } });
+const fileMissing = () => html(fixture('libgen-file-not-found.html'), 500);
+const adsBoth = [
+  ['libgen.download/api/download', serviceRedirects],
+  [/libgen\.(li|bz)\/ads\.php/, () => html(fixture('libgen-ads.html'))],
+];
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([...adsBoth.slice(0, 1), ['libgen.li/ads.php', () => html(fixture('libgen-ads.html'))], ['get.php', fileServes]]);
+  const file = await plugin.resolveFile(release, config(), host, undefined);
+  const probe = host.requests.find((r) => r.url.includes('get.php'));
+  check('probe: a served link is handed over', /\/get\.php\?md5=/.test(file.url), file.url);
+  check('probe: only the first bytes are asked for', probe?.init.headers?.Range === 'bytes=0-15', JSON.stringify(probe?.init.headers));
+  check('probe: asked with a same-origin Referer', probe?.init.headers?.Referer === 'https://libgen.li/');
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([...adsBoth, ['get.php', fileMissing]]);
+  const error = await rejects(plugin.resolveFile(release, config(), host, undefined));
+  check('probe: a listed but missing file is unreachable', error?.failure === 'unreachable', error?.message);
+  check('probe: says the file server does not have it', /lists this file but its file server does not have it/.test(error?.message ?? ''), error?.message);
+  check('probe: suggests another release', /Try another release/.test(error?.message ?? ''), error?.message);
+  check('probe: every mirror was tried', host.requests.filter((r) => r.url.includes('get.php')).length === 2);
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([...adsBoth, ['libgen.li/get.php', fileMissing], ['libgen.bz/get.php', fileServes]]);
+  const file = await plugin.resolveFile(release, config(), host, undefined);
+  check('probe: the next mirror serves it', file.url.startsWith('https://libgen.bz/get.php'), file.url);
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost([...adsBoth, ['get.php', () => html('<html><body><h1>503 Service Temporarily Unavailable</h1></body></html>', 503)]]);
+  const error = await rejects(plugin.resolveFile(release, config(), host, undefined));
+  check('probe: an outage is not reported as a missing file', !/does not have it/.test(error?.message ?? '') && /answered 503/.test(error?.message ?? ''), error?.message);
+}
+{
+  const plugin = await loadPlugin();
+  const host = makeHost(adsBoth);
+  const file = await plugin.resolveFile(release, config(), host, undefined);
+  check('probe: no answer at all keeps the link', /\/get\.php\?md5=/.test(file.url), file.url);
+}
+
 {
   const plugin = await loadPlugin();
   const host = makeHost([['/dyn/api/fast_download.json', () => json({ download_url: 'https://fast.example/abc.epub', account_fast_download_info: {} })]]);

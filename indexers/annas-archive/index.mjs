@@ -124,7 +124,7 @@ function looksLikeAnnasArchive(html) {
 
 export default {
   apiVersion: 1,
-  version: '1.2.0',
+  version: '1.2.1',
   update: {
     manifestUrl: 'https://raw.githubusercontent.com/TheCoolHippo/bookorbit-annas-archive/main/updates/annas-archive.json',
     ed25519PublicKey: 'OlmPIog8s2G128FNUXGEIWoAsok_yUqQvHFK9T_1L-M',
@@ -617,6 +617,7 @@ async function libgenDownloadUrl(md5, config, host, signal) {
   }
 
   const failures = [];
+  const missing = [];
   for (const mirror of libgenMirrorsOf(config)) {
     if (signal?.aborted) break;
     const page = new URL('/ads.php', mirror);
@@ -630,13 +631,57 @@ async function libgenDownloadUrl(md5, config, host, signal) {
       });
       const html = await readBoundedText(response, MAX_PAGE_BYTES);
       const link = LIBGEN_GET_LINK.exec(html)?.[1];
-      if (link) return new URL(link.replace(/&amp;/g, '&'), `${mirror}/`).href;
-      failures.push(`${hostOf(mirror)}: ${response.ok ? 'no download link on the page' : `answered ${response.status}${refusalOf(html)}`}`);
+      if (!link) {
+        failures.push(`${hostOf(mirror)}: ${response.ok ? 'no download link on the page' : `answered ${response.status}${refusalOf(html)}`}`);
+        continue;
+      }
+      const url = new URL(link.replace(/&amp;/g, '&'), `${mirror}/`).href;
+      const refusal = await probeDownload(host, url, `${mirror}/`);
+      if (!refusal) return url;
+      if (refusal === MISSING_FILE) missing.push(hostOf(mirror));
+      failures.push(`${hostOf(mirror)}: ${refusal === MISSING_FILE ? 'its file server does not have the file' : refusal}`);
     } catch (error) {
       failures.push(`${hostOf(mirror)}: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
+  if (missing.length && missing.length === failures.length) {
+    throw host.fail(
+      'unreachable',
+      `Library Genesis lists this file but its file server does not have it (${missing.join(', ')}). Try another release.`,
+    );
+  }
   throw host.fail('unreachable', `no Library Genesis mirror offered this file (${failures.join('; ') || 'no mirror configured'})`);
+}
+
+const MISSING_FILE = Symbol('missing file');
+const LIBGEN_MISSING_FILE = /file not found|repositories may not be synchronized/i;
+
+/**
+ * Whether the file server behind a get.php link holds the file: null when it does, otherwise why not.
+ *
+ * Library Genesis keeps listing files its file server no longer has. The ad page still hands over a
+ * get.php link, the link redirects to the file server, and only there does the answer become a 500
+ * "File not found. The repositories may not be synchronized". Unchecked, that link reached the
+ * download client and the request failed later as "That URL answered 500", which says nothing about
+ * what to do next. Only the first bytes are asked for: the link serves the file again afterwards.
+ *
+ * A probe that cannot get an answer at all says nothing about the file, so the link is kept.
+ */
+async function probeDownload(host, url, referer) {
+  let response;
+  try {
+    response = await host.fetch(url, { method: 'GET', headers: { 'User-Agent': USER_AGENT, Range: 'bytes=0-15', Referer: referer } });
+  } catch {
+    return null;
+  }
+  const type = response.headers.get('content-type') ?? '';
+  if ((response.status === 200 || response.status === 206) && !/text\/html/i.test(type)) {
+    await discard(response);
+    return null;
+  }
+  const page = await readBoundedText(response, MAX_REFUSAL_BYTES).catch(() => '');
+  if (LIBGEN_MISSING_FILE.test(page)) return MISSING_FILE;
+  return `the download link answered ${response.status}${refusalOf(page)}`;
 }
 
 /* ----------------------------------------------------------------------------------------------
