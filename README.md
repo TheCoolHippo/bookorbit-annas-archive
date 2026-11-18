@@ -41,6 +41,14 @@ before it is handed over, by asking for its first bytes only, and each mirror is
 When none has the file, the grab fails at once with "Library Genesis lists this file but its file
 server does not have it. Try another release." instead of a bare "That URL answered 500" later.
 
+Most of that is caught earlier, at search time: without an account key, up to 12 results are
+checked the same way, three at a time, and those whose file is missing are not offered at all.
+That matters for automatic fulfilment: a grab the plugin refuses makes BookOrbit skip every other
+release from this indexer for the rest of the attempt, while a release that is never offered costs
+nothing. Only a definite "not found" removes a result; a check that times out or hits an outage
+keeps it. Searches wait at most 9 seconds for the checks, and the answers are remembered (missing
+for 6 hours, present for 1 hour), so a second search is quicker and sees more of them.
+
 An empty result from Anna's Archive ("No files found") counts as a real answer and returns
 nothing. A page whose layout the plugin cannot read does not: it falls back to Library Genesis,
 so a markup change never looks like "this book does not exist".

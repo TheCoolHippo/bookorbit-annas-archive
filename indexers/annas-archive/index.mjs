@@ -37,6 +37,7 @@ const ALLOWED_COMIC_FORMATS = ['cbz', 'cbr', 'cb7', 'pdf'];
  */
 const COMIC_ARCHIVE_ALIASES = { rar: 'cbr', zip: 'cbz', '7z': 'cb7' };
 const MEDIA_KINDS = ['ebook', 'comic'];
+const COMIC_FORMATS = ['cbz', 'cbr', 'cb7'];
 
 /** A full result page of markup, with room to spare. Nothing is buffered past this. */
 const MAX_PAGE_BYTES = 4 * 1024 * 1024;
@@ -124,7 +125,7 @@ function looksLikeAnnasArchive(html) {
 
 export default {
   apiVersion: 1,
-  version: '1.2.1',
+  version: '1.2.2',
   update: {
     manifestUrl: 'https://raw.githubusercontent.com/TheCoolHippo/bookorbit-annas-archive/main/updates/annas-archive.json',
     ed25519PublicKey: 'OlmPIog8s2G128FNUXGEIWoAsok_yUqQvHFK9T_1L-M',
@@ -217,8 +218,9 @@ export default {
 
     const annas = await searchAnnas(query, config, formats, host, signal, remaining);
     if (annas.answered) {
-      logSearch(host, config, query, 'annas', annas.releases.length, started);
-      return annas.releases;
+      const releases = await keepDownloadable(annas.releases, config, host, remaining);
+      logSearch(host, config, query, 'annas', releases.length, started);
+      return releases;
     }
 
     if (!libgenEnabled(config)) {
@@ -228,7 +230,8 @@ export default {
 
     host.logger.log(`[annas-archive.search] [fallback] indexerId=${config.id} reason="${annas.reason}" - searching Library Genesis`);
     try {
-      const releases = await searchLibgen(query, config, formats, host, signal, remaining);
+      const found = await searchLibgen(query, config, formats, host, signal, remaining);
+      const releases = await keepDownloadable(found, config, host, remaining);
       logSearch(host, config, query, 'libgen', releases.length, started);
       return releases;
     } catch (error) {
@@ -605,15 +608,17 @@ const LIBGEN_GET_LINK = /href=["']((?:https?:\/\/[^"'\/]+)?\/?get\.php\?md5=[a-f
  * there. So the service is asked without following redirects, and anything but the file itself
  * sends the search to the configured mirrors' own ad pages, which carry the real `get.php` link.
  */
-async function libgenDownloadUrl(md5, config, host, signal) {
-  const direct = new URL('/api/download', LIBGEN_DOWNLOAD_ORIGIN);
-  direct.searchParams.set('id', md5);
-  try {
-    const response = await host.fetch(direct.href, { method: 'GET', redirect: 'manual', headers: { 'User-Agent': USER_AGENT } });
-    await discard(response);
-    if (response.ok) return direct.href;
-  } catch {
-    // Unreachable or refused: the mirrors below are the next door either way.
+async function libgenDownloadUrl(md5, config, host, signal, { skipService = false, firstMissingIsFinal = false } = {}) {
+  if (!skipService) {
+    const direct = new URL('/api/download', LIBGEN_DOWNLOAD_ORIGIN);
+    direct.searchParams.set('id', md5);
+    try {
+      const response = await host.fetch(direct.href, { method: 'GET', redirect: 'manual', headers: { 'User-Agent': USER_AGENT } });
+      await discard(response);
+      if (response.ok) return direct.href;
+    } catch {
+      // Unreachable or refused: the mirrors below are the next door either way.
+    }
   }
 
   const failures = [];
@@ -640,17 +645,105 @@ async function libgenDownloadUrl(md5, config, host, signal) {
       if (!refusal) return url;
       if (refusal === MISSING_FILE) missing.push(hostOf(mirror));
       failures.push(`${hostOf(mirror)}: ${refusal === MISSING_FILE ? 'its file server does not have the file' : refusal}`);
+      // The mirrors hand out links to the same file server, so a second "not found" is only time.
+      if (refusal === MISSING_FILE && firstMissingIsFinal) break;
     } catch (error) {
       failures.push(`${hostOf(mirror)}: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
   if (missing.length && missing.length === failures.length) {
-    throw host.fail(
+    const error = host.fail(
       'unreachable',
       `Library Genesis lists this file but its file server does not have it (${missing.join(', ')}). Try another release.`,
     );
+    error.missingFile = true;
+    throw error;
   }
   throw host.fail('unreachable', `no Library Genesis mirror offered this file (${failures.join('; ') || 'no mirror configured'})`);
+}
+
+/* ----------------------------------------------------------------------------------------------
+ * Which releases can actually be downloaded
+ * ------------------------------------------------------------------------------------------- */
+
+/** Releases checked at once. Library Genesis runs out of database connections under load. */
+const PROBE_CONCURRENCY = 3;
+/** Releases checked per search; the rest are offered unchecked, as before. */
+const PROBE_LIMIT = 12;
+/** How long a search waits for checks, whatever is left of its own budget. */
+const PROBE_WINDOW_MS = 9_000;
+/** A search that has less than this left skips the checks rather than risk BookOrbit's deadline. */
+const PROBE_MIN_REMAINING_MS = 3_000;
+const MISSING_TTL_MS = 6 * 60 * 60 * 1000;
+const PRESENT_TTL_MS = 60 * 60 * 1000;
+/** md5 -> { present, until }. Shared by every search this process runs, like `blockedUntil`. */
+const availability = new Map();
+
+/**
+ * The releases worth offering: every one except those Library Genesis lists but no longer has.
+ *
+ * The check has to happen here rather than when a release is grabbed. A grab that the plugin
+ * refuses makes BookOrbit's automatic fulfilment skip every other release from this indexer for
+ * the rest of the pass, so one missing file would end the attempt; a release that is simply not
+ * offered costs nothing. The download is then checked again when it is resolved, in case the file
+ * went missing since.
+ *
+ * Only a definite "the file server does not have it" removes a release. A check that times out,
+ * hits an outage or runs past the window keeps the release, which is how it was offered before.
+ * With a member's key the fast download servers do not depend on Library Genesis, so nothing is
+ * checked.
+ */
+async function keepDownloadable(releases, config, host, remaining) {
+  if (config.credential || releases.length === 0) return releases;
+  const known = (release) => {
+    const entry = availability.get(release.guid);
+    return entry && entry.until > Date.now() ? entry.present : undefined;
+  };
+  const toCheck = releases.filter((release) => known(release) === undefined).slice(0, PROBE_LIMIT);
+  const window = Math.min(PROBE_WINDOW_MS, remaining() - PROBE_MIN_REMAINING_MS);
+
+  let checked = 0;
+  if (toCheck.length && window > 0) {
+    const queue = [...toCheck];
+    const worker = async () => {
+      while (queue.length) {
+        const release = queue.shift();
+        const present = await isDownloadable(release, config, host);
+        if (present !== null) {
+          availability.set(release.guid, { present, until: Date.now() + (present ? PRESENT_TTL_MS : MISSING_TTL_MS) });
+          checked += 1;
+        }
+      }
+    };
+    const workers = Promise.all(Array.from({ length: Math.min(PROBE_CONCURRENCY, queue.length) }, worker));
+    let timer;
+    // Checks still running when the window closes finish in the background and fill the cache for
+    // the next search; this one stops waiting for them.
+    await Promise.race([workers, new Promise((resolve) => (timer = setTimeout(resolve, window)))]);
+    clearTimeout(timer);
+  }
+
+  const kept = releases.filter((release) => known(release) !== false);
+  const dropped = releases.length - kept.length;
+  host.logger.log(
+    `[annas-archive.availability] [end] indexerId=${config.id} offered=${releases.length} checked=${checked} ` +
+      `dropped=${dropped} - releases whose file Library Genesis no longer has were left out`,
+  );
+  return kept;
+}
+
+/** true when the file can be downloaded, false when it is listed but missing, null when unknown. */
+async function isDownloadable(release, config, host) {
+  const md5 = md5Of(release);
+  if (!md5) return null;
+  try {
+    // The download service only serves the book collections; asking it about a comic is a sure 404.
+    const comic = COMIC_FORMATS.includes(String(release.format ?? '').toLowerCase());
+    await libgenDownloadUrl(md5, config, host, undefined, { skipService: comic, firstMissingIsFinal: true });
+    return true;
+  } catch (error) {
+    return error?.missingFile === true ? false : null;
+  }
 }
 
 const MISSING_FILE = Symbol('missing file');

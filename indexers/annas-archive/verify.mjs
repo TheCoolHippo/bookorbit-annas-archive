@@ -543,5 +543,64 @@ const adsBoth = [
   check('test: bad key fails the test', result.success === false && /rejected/.test(result.error ?? ''), JSON.stringify(result));
 }
 
+/* --- availability: releases whose file Library Genesis no longer has are not offered ----------- */
+/** An ad page whose get.php link carries the md5 it was asked about, so each release can differ. */
+const adsFor = (url) => html(`<html><body><a href="get.php?md5=${new URL(url).searchParams.get('md5')}&key=K3Y${new URL(url).searchParams.get('md5').slice(0, 4)}">GET</a></body></html>`);
+const md5InUrl = (url) => /md5=([a-f0-9]{32})/.exec(url)?.[1];
+const comicHost = (getAnswer, extra = []) =>
+  makeHost([
+    [ANNAS, () => html(fixture('ddos-guard-captcha.html'), 403, { server: 'ddos-guard' })],
+    [LIBGEN, () => html(fixture('libgen-comics.html'))],
+    ['libgen.download/api/download', () => new Response(null, { status: 404 })],
+    [/libgen\.(li|bz)\/ads\.php/, adsFor],
+    ['get.php', getAnswer],
+    ...extra,
+  ]);
+const comicQuery = query({ title: 'Asterix', author: null, mediaKind: 'comic', limit: 50 });
+{
+  const plugin = await loadPlugin();
+  const all = await plugin.search(comicQuery, config(), makeHost([
+    [ANNAS, () => html(fixture('ddos-guard-captcha.html'), 403, { server: 'ddos-guard' })],
+    [LIBGEN, () => html(fixture('libgen-comics.html'))],
+  ]), undefined);
+  const gone = new Set(all.slice(0, 4).map((r) => r.guid));
+
+  const fresh = await loadPlugin();
+  const host = comicHost((url) => (gone.has(md5InUrl(url)) ? fileMissing() : fileServes()));
+  const releases = await fresh.search(comicQuery, config(), host, undefined);
+  check('availability: missing files are left out', releases.length === all.length - 4 && !releases.some((r) => gone.has(r.guid)), `${releases.length} of ${all.length}`);
+  check('availability: at most 12 checked per search', new Set(host.requests.filter((r) => r.url.includes('get.php')).map((r) => md5InUrl(r.url))).size === 12);
+  check('availability: logged', host.logs.some((line) => /\[annas-archive.availability\].*dropped=4/.test(line)), host.logs.find((l) => /availability/.test(l)));
+  check('availability: the book download service is not asked about comics', !host.requests.some((r) => r.url.includes('libgen.download')));
+  const firstMissing = [...gone][0];
+  check('availability: one "not found" is enough while sorting', host.requests.filter((r) => r.url.includes('get.php') && r.url.includes(firstMissing)).length === 1);
+
+  const before = host.requests.filter((r) => r.url.includes('get.php')).length;
+  const again = await fresh.search(comicQuery, config(), host, undefined);
+  const newChecks = host.requests.filter((r) => r.url.includes('get.php')).slice(before).map((r) => md5InUrl(r.url));
+  check('availability: a checked file is not checked again', newChecks.every((md5) => !gone.has(md5)) && again.every((r) => !gone.has(r.guid)), newChecks.join());
+}
+{
+  const plugin = await loadPlugin();
+  const host = comicHost(() => html('<html><body><h1>503 Service Temporarily Unavailable</h1></body></html>', 503));
+  const releases = await plugin.search(comicQuery, config(), host, undefined);
+  check('availability: an outage removes nothing', releases.length === 25, `got ${releases.length}`);
+}
+{
+  const plugin = await loadPlugin();
+  const host = comicHost(fileMissing);
+  const releases = await plugin.search(comicQuery, config({ credential: 'member-key' }), host, undefined);
+  check('availability: a member key checks nothing', releases.length === 25 && !host.requests.some((r) => /ads\.php|get\.php/.test(r.url)));
+}
+{
+  const plugin = await loadPlugin();
+  const host = comicHost(() => new Promise(() => {}));
+  const started = Date.now();
+  const releases = await plugin.search(comicQuery, config(), host, undefined);
+  const took = Date.now() - started;
+  check('availability: a silent file server keeps every release', releases.length === 25, `got ${releases.length}`);
+  check('availability: the search does not wait past its window', took < 11_000, `${took} ms`);
+}
+
 console.log(`${passed} passed, ${failures} failed`);
 process.exit(failures === 0 ? 0 : 1);
